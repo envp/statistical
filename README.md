@@ -30,7 +30,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/vaibhav-y/statistical.
+Bug reports and pull requests are welcome. See CONTRIBUTING.md for more details.
 
 
 ## License

@@ -91,3 +91,7 @@ describe Statistical::Rng::Uniform do
     end
   end
 end
+
+describe Statistical::Distribution::Uniform do
+  skip('No tests implemented')
+end
