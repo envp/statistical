@@ -71,7 +71,7 @@ describe Statistical::Rng::Uniform do
     end
   end
 
-  describe '#eql?' do
+  describe '#==' do
     context 'when compared against another uniform distribution' do
       let(:seed_a) {Random.new_seed}
       let(:seed_b) {Random.new_seed}
@@ -97,6 +97,121 @@ describe Statistical::Rng::Uniform do
   end
 end
 
+
 describe Statistical::Distribution::Uniform do
-  skip('No tests implemented')
+  describe '.new' do
+    context 'when called with no arguments' do
+      let(:udist) {Statistical::Distribution::Uniform.new}
+      it 'returned instanace has lower = 0.0' do
+        expect(udist.lower).to eq(0.0)
+      end
+      
+      it 'returned instanace has upper = 1.0' do
+        expect(udist.upper).to eq(1.0)
+      end
+    end
+    
+    context 'when upper and lower bounds are specified' do
+      let(:lo) {15}
+      let(:up) {157.7}
+      let(:udist) {Statistical::Distribution::Uniform.new(lo, up)}
+      it 'should have the right lower bound set' do
+        expect(udist.lower).to eq(lo)
+      end
+      
+      it 'should have the right upper bound set' do
+        expect(udist.upper).to eq(up)
+      end
+    end
+  end
+  
+  
+  describe '#pdf' do
+    let(:udist) {Statistical::Distribution::Uniform.new}
+    context 'when called with x < lower' do
+      it {expect(udist.pdf(-1)).to eq(0.0)}
+    end
+    
+    context 'when called with x > upper' do
+      it {expect(udist.pdf(2)).to eq(0.0)}
+    end
+    
+    context 'when called with x in [lower, upper]' do
+      it {expect(udist.pdf(rand)).to eq(1.0)}
+    end
+  end
+  
+  describe '#cdf' do
+    let(:udist) {Statistical::Distribution::Uniform.new}
+    context 'when called with x < lower' do
+      it {expect(udist.cdf(-1)).to eq(0.0)}
+    end
+    
+    context 'when called with x > upper' do
+      it {expect(udist.cdf(2)).to eq(1.0)}
+    end
+    
+    context 'when called with x in [lower, upper]' do
+      x = rand
+      it {expect(udist.cdf(x)).to eq(x)}
+    end
+  end
+  
+  describe '#quantile' do
+    let(:udist) {Statistical::Distribution::Uniform.new}
+    context 'when called for x > 1' do
+      it {expect {udist.quantile(2)}.to raise_error(RangeError)}
+    end
+    
+    context 'when called for x < 0' do
+      it {expect {udist.quantile(-1)}.to raise_error(RangeError)}
+    end
+    
+    context 'when called for x in [0, 1]' do
+      x = rand
+      it {expect(udist.quantile(x)).to eq(x)}
+    end
+  end
+  
+  describe '#p_value' do
+    let(:udist) {Statistical::Distribution::Uniform.new}
+    it 'should be the same as #quantile' do
+      x = rand
+      expect(udist.quantile(x)).to eq(udist.p_value(x))
+    end
+  end  
+  
+  describe '#mean' do
+    let(:udist) {Statistical::Distribution::Uniform.new}
+    it 'should return the correct mean' do
+      expect(udist.mean).to eq(0.5)
+    end
+  end
+  
+  describe '#variance' do
+    let(:udist) {Statistical::Distribution::Uniform.new}
+    it 'should return the correct variance' do
+      expect(udist.variance).to eq(1.0/12)
+    end
+  end
+  
+  describe '#==' do
+    let(:udist) {Statistical::Distribution::Uniform.new}
+    let(:udist_clone) {Statistical::Distribution::Uniform.new}
+    let(:udist_impostor) {Statistical::Distribution::Uniform.new(0.5, 1.56)}
+    
+    context 'when compared against another Uniform distribution' do
+      it 'returns `true` if they have the same parameters' do
+        expect(udist).to eq(udist_clone)
+      end
+      
+      it 'returns `false` if they have different parameters' do
+        expect(udist).not_to eq(udist_impostor)
+      end
+    end
+    
+    context 'when compared against any distribution type' do
+      skip('Needs implementation of other distributions')
+    end
+  end
 end

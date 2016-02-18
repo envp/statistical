@@ -22,7 +22,7 @@ module Statistical
       end
 
       def quantile(q)
-        raise RangeError, '`q` must be in [0, 1]' if q < 0 || q > 1
+        raise RangeError, "`q` must be in [0, 1], found: #{q}" if q < 0 || q > 1
         return @lower + q * (@upper - @lower)
       end
 
@@ -37,11 +37,13 @@ module Statistical
       def eql?(other)
         return false unless other.is_a?(Statistical::Distribution::Uniform)
         return false unless @lower == other.lower && @upper == other.upper
-        true
+        return true
       end
 
-      alias == eql?
-      alias p_value quantile
+      alias_method :==, :eql?
+      alias_method :p_value, :quantile
+      
+      private :eql?
     end
   end
 end
