@@ -6,13 +6,15 @@ module Statistical
     class Uniform
       attr_reader :lower, :upper, :generator
 
-      def initialize(seed = Random.new_seed, dist_obj)
-        raise ValueError, %q{distribution object must be of same type
-          as self} unless dist_obj.is_a?(Statistical::Distribution::Uniform)
-        
+      def initialize(dobj = nil, seed = Random.new_seed)
+        unless dobj.nil? or dobj.is_a?(Statistical::Distribution::Uniform)  
+          raise TypeError, "Expected Distribution object or nil, found #{dobj.class}"
+        end
+        dobj = Statistical::Distribution::Uniform.new if dobj.nil?
         @generator = Random.new(seed)
-        @lower = dist_obj.lower
-        @upper = dist_obj.upper
+        @lower = dobj.lower
+        @upper = dobj.upper
+        @sdist = dobj
       end
 
       def rand
@@ -20,13 +22,13 @@ module Statistical
       end
 
       def eql?(other)
-        return false unless other.is_a?(Statistical::Rng::Uniform)
+        return false unless other.is_a?(self.class)
         return false unless @lower == other.lower && @upper == other.upper
         @generator == other.generator
       end
 
       def type
-        dist_obj.class
+        @sdist.class
       end
 
       alias == eql?

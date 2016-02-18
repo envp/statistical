@@ -73,3 +73,7 @@ Style/TrailingWhitespace:
 Style/UnneededPercentQ:
   Exclude:
     - 'statistical.gemspec'
+
+# I'm fine with either
+Style/RedundantReturn:
+  Enabled: false

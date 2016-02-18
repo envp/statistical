@@ -1,5 +1,4 @@
 require 'statistical/exceptions'
-require 'statistical/distribution/uniform'
 
 module Statistical
   module Distribution
@@ -13,26 +12,26 @@ module Statistical
 
       def pdf(x)
         return 0.0 if x < @lower || x > @upper
-        1.0 / (@upper - @lower)
+        return 1.0 / (@upper - @lower)
       end
       
       def cdf(x)
         return 0.0 if x < @lower
         return 1.0 if x > @upper
-        (x - @lower) / (@upper - @lower)
+        return (x - @lower) / (@upper - @lower)
       end
       
       def quantile(q)
         raise RangeError, "`q` must be in [0, 1]" if q < 0 || q > 1
-        @lower + q * (@upper - @lower)
+        return @lower + q * (@upper - @lower)
       end
       
       def mean
-        0.5 * (@upper - @lower)
+        return 0.5 * (@upper - @lower)
       end
       
       def variance
-        ((@upper - @lower) ** 2) / 12.0
+        return ((@upper - @lower) ** 2) / 12.0
       end
       
       def eql?(other)

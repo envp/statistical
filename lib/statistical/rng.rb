@@ -4,7 +4,7 @@ require 'statistical/distribution'
 module Statistical
   module Rng
     def self.create(type = :uniform, *args)
-      Distribution::DISTRIBUTION_TYPES[type].new(*args)
+      dist_type = Statistical::Distribution::DISTRIBUTION_TYPES[type]
     end
   end
 end
