@@ -7,7 +7,7 @@ module Statistical
       attr_reader :lower, :upper, :generator
 
       def initialize(dobj = nil, seed = Random.new_seed)
-        unless dobj.nil? or dobj.is_a?(Statistical::Distribution::Uniform)  
+        unless dobj.nil? || dobj.is_a?(Statistical::Distribution::Uniform)
           raise TypeError, "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Uniform.new if dobj.nil?

@@ -48,6 +48,7 @@ Style/PercentLiteralDelimiters:
 # SupportedStyles: space, no_space
 Style/SpaceInsideBlockBraces:
   Enabled: true
+  EnforcedStyle: no_space
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.

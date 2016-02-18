@@ -13,7 +13,7 @@ describe Statistical::Rng::Uniform do
 
   describe '.new' do
     context 'when called with no arguments' do
-      let(:obs) { Statistical::Rng::Uniform.new }
+      let(:obs) {Statistical::Rng::Uniform.new}
 
       it 'returned instance has attribute lower = 0.0' do
         expect(obs.lower).to eq(0.0)
@@ -25,10 +25,10 @@ describe Statistical::Rng::Uniform do
     end
 
     context 'when upper and lower bounds are specified' do
-      let(:lo) { 12 }
-      let(:up) { 16 }
-      let(:dist_obj) { Statistical::Distribution::Uniform.new(lo, up) }
-      let(:obs) { Statistical::Rng::Uniform.new(dist_obj, Random.new_seed) }
+      let(:lo) {12}
+      let(:up) {16}
+      let(:dist_obj) {Statistical::Distribution::Uniform.new(lo, up)}
+      let(:obs) {Statistical::Rng::Uniform.new(dist_obj, Random.new_seed)}
 
       it 'has the right lower bound attribute' do
         expect(obs.lower).to eq(lo)
@@ -40,10 +40,10 @@ describe Statistical::Rng::Uniform do
     end
 
     context 'when initialized with a seed' do
-      let(:seed) { Random.new_seed }
-      let(:dist_obj) { Statistical::Distribution::Uniform.new }
-      let(:gen_a) { Statistical::Rng::Uniform.new(dist_obj, seed) }
-      let(:gen_b) { Statistical::Rng::Uniform.new(nil, seed) }
+      let(:seed) {Random.new_seed}
+      let(:dist_obj) {Statistical::Distribution::Uniform.new}
+      let(:gen_a) {Statistical::Rng::Uniform.new(dist_obj, seed)}
+      let(:gen_b) {Statistical::Rng::Uniform.new(nil, seed)}
 
       it 'should be equivalent if the same seed is used' do
         expect(gen_a).to eq(gen_b)
@@ -52,11 +52,11 @@ describe Statistical::Rng::Uniform do
   end
 
   describe '#rand' do
-    let(:obs_default) { Statistical::Rng::Uniform.new }
-    let(:lo) { 12 }
-    let(:up) { 16 }
-    let(:dist_obj) { Statistical::Distribution::Uniform.new(lo, up) }
-    let(:obs) { Statistical::Rng::Uniform.new(dist_obj, Random.new_seed) }
+    let(:obs_default) {Statistical::Rng::Uniform.new}
+    let(:lo) {12}
+    let(:up) {16}
+    let(:dist_obj) {Statistical::Distribution::Uniform.new(lo, up)}
+    let(:obs) {Statistical::Rng::Uniform.new(dist_obj, Random.new_seed)}
 
     it 'returns a number between 0 and 1 by default' do
       sample = obs_default.rand
@@ -73,12 +73,12 @@ describe Statistical::Rng::Uniform do
 
   describe '#eql?' do
     context 'when compared against another uniform distribution' do
-      let(:seed_a) { Random.new_seed }
-      let(:seed_b) { Random.new_seed }
-      let(:dist_obj) { Statistical::Distribution::Uniform.new(1, 2) }
-      let(:gen_a) { Statistical::Rng::Uniform.new(nil, seed_a) }
-      let(:gen_a_cp) { Statistical::Rng::Uniform.new(nil, seed_a) }
-      let(:gen_b) { Statistical::Rng::Uniform.new(dist_obj, seed_a) }
+      let(:seed_a) {Random.new_seed}
+      let(:seed_b) {Random.new_seed}
+      let(:dist_obj) {Statistical::Distribution::Uniform.new(1, 2)}
+      let(:gen_a) {Statistical::Rng::Uniform.new(nil, seed_a)}
+      let(:gen_a_cp) {Statistical::Rng::Uniform.new(nil, seed_a)}
+      let(:gen_b) {Statistical::Rng::Uniform.new(dist_obj, seed_a)}
 
       it 'should return true if the bounds and seed are the same' do
         expect(gen_a).to eq(gen_a_cp)
