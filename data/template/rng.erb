@@ -1,0 +1,36 @@
+require 'statistical/exceptions'
+require 'statistical/distribution/<%= distribution%>'
+
+module Statistical
+  module Rng
+    class <%= distribution.capitalize %>
+      attr_reader :generator, # other params go here
+
+      def initialize(dobj = nil, seed = Random.new_seed)
+        unless dobj.nil? || dobj.is_a?(Statistical::Distribution::<%= distribution.capitalize %>)
+          raise TypeError, "Expected Distribution object or nil, found #{dobj.class}"
+        end
+        dobj = Statistical::Distribution::<%= distribution.capitalize %>.new if dobj.nil?
+        @generator = Random.new(seed)
+        # Map other parameters here
+        @sdist = dobj
+      end
+
+      def rand
+      end
+
+      def eql?(other)
+        return false unless other.is_a?(self.class)
+        # Compare parameters and other stuff here
+        @generator == other.generator
+      end
+
+      def type
+        @sdist.class
+      end
+
+      alias_method :==, :eql?
+      private :eql?
+    end
+  end
+end

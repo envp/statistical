@@ -1,0 +1,39 @@
+require 'statistical/exceptions'
+
+module Statistical
+  module Distribution
+    class <%= distribution.capitalize %>
+      attr_reader # params go here
+      
+      def initialize(<% parameters %>)
+      end
+
+      def pdf(x)
+      end
+
+      def cdf(x)
+      end
+
+      def quantile(q)
+        raise RangeError, "`q` must be in [0, 1], found: #{q}" if q < 0 || q > 1
+      end
+
+      def mean
+      end
+
+      def variance
+      end
+
+      def eql?(other)
+        return false unless other.is_a?(self.class)
+        # Compare parameters and other stuff here
+        return true
+      end
+
+      alias_method :==, :eql?
+      alias_method :p_value, :quantile
+      
+      private :eql?
+    end
+  end
+end
