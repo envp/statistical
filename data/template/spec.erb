@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'statistical/rng/<%= distribution%>'
 require 'statistical/distribution/<%= distribution %>'
 
-describe Statistical::Rng::<%= distribution.capitalize %> do
+describe Statistical::Rng::<%= distribution.capitalize.camelcase %> do
   it 'passes the G-test at a 95% significance level' do
   end
 
@@ -45,7 +45,7 @@ describe Statistical::Rng::<%= distribution.capitalize %> do
 end
 
 
-describe Statistical::Distribution::<%= distribution.capitalize %> do
+describe Statistical::Distribution::<%= distribution.capitalize.camelcase %> do
   describe '.new' do
     context 'when called with no arguments' do
     end

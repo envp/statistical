@@ -6,6 +6,12 @@ require 'erb'
 gem_base = File.expand_path(File.dirname(__FILE__) + '/..')
 require gem_base + '/lib/statistical'
 
+class String
+  def camelcase
+    self.split('_').map(&:capitalize).join
+  end
+end
+
 needs_new = false
 parameters = ''
 OptionParser.new do |opts|

@@ -5,9 +5,9 @@ module Statistical
     # An abstraction of the common statistical properties of the uniform 
     # distribution. Provides a PDF, CDF, Inverse-CDF, mean, variance
     #
-    # Note: If initialized with lower and upper parameters in reverse order,
-    #   it swaps them. Eg. initializing with lower = 10 and upper = 2 is the
-    #   same as lower = 2 and upper = 10, due to the swap during call to new(,)
+    # @note If initialized with lower and upper parameters in reverse order, it 
+    #   swaps them. Eg. initializing with lower = 10 and upper = 2 is the same 
+    #   as lower = 2 and upper = 10, due to the swap during call to new(,)
     #
     # @author Vaibhav Yenamandra
     #
@@ -20,7 +20,7 @@ module Statistical
 
       # Returns a new `Statistical::Distribution::Uniform` instance
       #
-      # Note: if given lower > upper, it swaps them internally
+      # @note if given lower > upper, it swaps them internally
       # @example Initialize with lower > upper:
       #   Statistical::Distribution.create(:uniform, 10, 1)
       #   #=> #<Statistical::Distribution::Uniform:0x00000001489be8 @lower=1, @upper=10>

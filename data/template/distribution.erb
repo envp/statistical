@@ -11,7 +11,7 @@ module Statistical
     # @attr_writer [Types] attribute_name a full description of the attribute
     # @attr_reader [Types] attribute_name a full description of the attribute
     # @deprecated warn if the class is deprecated and provide and alternative
-    class <%= distribution.capitalize %>
+    class <%= distribution.capitalize.camelcase %>
       attr_reader # params go here
 
       # Returns a new `Statistical::Distribution::Uniform` instance
@@ -21,7 +21,7 @@ module Statistical
       # @author Full Name
       # 
       # @param [Types] param_name Description 
-      # @return `Statistical::Distribution::<%= distribution.capitalize %>` instance      
+      # @return `Statistical::Distribution::<%= distribution.capitalize.camelcase %>` instance      
       def initialize(<% parameters %>)
       end
       
