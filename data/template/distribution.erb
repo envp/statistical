@@ -2,28 +2,91 @@ require 'statistical/exceptions'
 
 module Statistical
   module Distribution
+    # Say something useful about this class.
+    #
+    # Note: Any caveats you want to talk about go here...
+    #
+    # @author Full Name
+    # @attr [Types] attribute_name a full description of the attribute
+    # @attr_writer [Types] attribute_name a full description of the attribute
+    # @attr_reader [Types] attribute_name a full description of the attribute
+    # @deprecated warn if the class is deprecated and provide and alternative
     class <%= distribution.capitalize %>
       attr_reader # params go here
-      
+
+      # Returns a new `Statistical::Distribution::Uniform` instance
+      #
+      # Note: if any...
+      #
+      # @author Full Name
+      # 
+      # @param [Types] param_name Description 
+      # @return `Statistical::Distribution::<%= distribution.capitalize %>` instance      
       def initialize(<% parameters %>)
       end
-
+      
+      # Returns value of probability density function at a point. Calculated 
+      #   using some technique that you might want to name
+      #
+      # @author Full Name
+      # 
+      # @param [Numeric] x A real valued point
+      # @return 
       def pdf(x)
       end
 
+      # Returns value of cumulative density function at a point. Calculated 
+      #   using some technique that you might want to name
+      #
+      # @author Full Name
+      # 
+      # @param [Numeric] x A real valued point
+      # @return 
       def cdf(x)
       end
 
-      def quantile(q)
-        raise RangeError, "`q` must be in [0, 1], found: #{q}" if q < 0 || q > 1
+      # Returns value of inverse CDF for a given probability
+      #
+      # @see #p_value
+      #
+      # @author Full Name
+      # 
+      # @param [Numeric] p a value within [0, 1]
+      # @return Inverse CDF for valid p
+      # @raises [RangeError] if p > 1 or p < 0
+      def quantile(p)
+        raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
       end
 
+      # Returns the mean value for the calling instance. Calculated mean, and
+      #   not inferred from simulations
+      #
+      # @author Full Name
+      # 
+      # @param [Numeric] p a value within [0, 1]
+      # @return Mean of the distribution
       def mean
       end
 
+      # Returns the expected value of variance for the calling instance.
+      #
+      # @author Full Name
+      # 
+      # @param [Numeric] p a value within [0, 1]
+      # @return Variance of the distribution
       def variance
       end
 
+      # Compares two distribution instances and returns a boolean outcome
+      #   Available publicly as #==
+      #
+      # @author Full Name
+      # 
+      # @private
+      #
+      # @param other A distribution object (preferred)
+      # @return [Boolean] true if-and-only-if two instances are of the same
+      #   class and have the same parameters.
       def eql?(other)
         return false unless other.is_a?(self.class)
         # Compare parameters and other stuff here
