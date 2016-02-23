@@ -107,8 +107,7 @@ module Statistical
       # @return [Boolean] true if-and-only-if two instances are of the same
       #   class and have the same parameters.
       def eql?(other)
-        return false unless other.is_a?(Statistical::Distribution::Uniform)
-        return false unless @lower == other.lower && @upper == other.upper
+        return false unless other.is_a?(Statistical::Distribution::Uniform) && @lower == other.lower && @upper == other.upper
         return true
       end
 

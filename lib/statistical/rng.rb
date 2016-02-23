@@ -1,4 +1,5 @@
 require 'statistical/rng/uniform'
+require 'statistical/rng/uniform_discrete'
 
 module Statistical
   module Rng

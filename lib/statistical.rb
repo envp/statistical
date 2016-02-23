@@ -1,7 +1,8 @@
 require 'statistical/version'
 require 'statistical/distribution'
 require 'statistical/rng'
+require 'core_extensions'
 
 module Statistical
-  # Your code goes here...
+  
 end

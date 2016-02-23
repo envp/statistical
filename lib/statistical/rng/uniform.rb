@@ -40,8 +40,7 @@ module Statistical
     # @return true if and only if, source distributions are the same and the
     #   prng has the same initial state
       def eql?(other)
-        return false unless other.is_a?(self.class)
-        return false unless @lower == other.lower && @upper == other.upper
+        return false unless other.is_a?(self.class) && @lower == other.lower && @upper == other.upper
         @generator == other.generator
       end
     

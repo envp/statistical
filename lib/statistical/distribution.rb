@@ -1,4 +1,5 @@
 require 'statistical/distribution/uniform'
+require 'statistical/distribution/uniform_discrete'
 
 module Statistical
   module Distribution
@@ -17,7 +18,7 @@ module Statistical
     private
     def self.make_classmap
       rng_klasses = self.constants.select{ |k| self.const_get(k).is_a?(Class) }
-      keylist = rng_klasses.map { |k| k.to_s.downcase.to_sym }
+      keylist = rng_klasses.map { |k| k.to_s.snakecase.to_sym }
       klasses = rng_klasses.map { |k| self.const_get(k) }
       return Hash[keylist.zip(klasses)].freeze
     end
