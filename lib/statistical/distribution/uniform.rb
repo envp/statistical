@@ -44,7 +44,7 @@ module Statistical
       # @author Vaibhav Yenamandra
       # 
       # @param [Numeric] x A real valued point
-      # @return 1 if x is within [lower, upper], 0 otherwise
+      # @return [Float] 1 if x is within [lower, upper], 0 otherwise
       def pdf(x)
         return 0.0 if x < @lower || x > @upper
         return 1.0 / (@upper - @lower)
@@ -55,11 +55,11 @@ module Statistical
       # @author Vaibhav Yenamandra
       # 
       # @param [Numeric] x A real valued point
-      # @return 1 if x is within [lower, upper], 0 otherwise
+      # @return [Float] 1 if x is within [lower, upper], 0 otherwise
       def cdf(x)
         return 0.0 if x < @lower
         return 1.0 if x > @upper
-        return (x - @lower) / (@upper - @lower)
+        return (x - @lower).fdiv(@upper - @lower)
       end
 
       # Returns value of inverse CDF for a given probability
@@ -69,7 +69,7 @@ module Statistical
       # @author Vaibhav Yenamandra
       # 
       # @param [Numeric] p a value within [0, 1]
-      # @return Inverse CDF for valid p
+      # @return [Numeric] Inverse CDF for valid p
       # @raises [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
@@ -81,9 +81,9 @@ module Statistical
       # @author Vaibhav Yenamandra
       # 
       # @param [Numeric] p a value within [0, 1]
-      # @return Mean of the distribution
+      # @return [Float] Mean of the distribution
       def mean
-        return 0.5 * (@upper - @lower)
+        return 0.5 * (@upper + @lower)
       end
 
       # Returns the expected value of variance for the calling instance.
@@ -91,7 +91,7 @@ module Statistical
       # @author Vaibhav Yenamandra
       # 
       # @param [Numeric] p a value within [0, 1]
-      # @return Variance of the distribution
+      # @return [Float] Variance of the distribution
       def variance
         return ((@upper - @lower)**2) / 12.0
       end

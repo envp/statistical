@@ -38,4 +38,4 @@ Bug reports and pull requests are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
 ## Documentation
-Intermittently available [here](http://statistical-dimsum.c9users.io/)
+Available [here](http://www.rubydoc.info/github/vaibhav-y/statistical/master).
