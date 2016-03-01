@@ -14,5 +14,4 @@ YARD::Rake::YardocTask.new(:doc) do |t|
   t.files = ['lib/**/*.rb']
 end
 
-
 task :default => :spec

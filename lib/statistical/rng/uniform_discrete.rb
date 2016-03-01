@@ -4,7 +4,7 @@ require 'statistical/distribution/uniform_discrete'
 module Statistical
   module Rng
     class UniformDiscrete
-      attr_reader :generator, :lower, :upper
+      attr_reader :generator, :lower, :upper, :step
 
       # Companion RNG class for the continuous uniform distribution. Requires a
       #   distrbution object of the corresponding distribution
@@ -42,11 +42,11 @@ module Statistical
       # @return true if and only if, source distributions are the same and the
       #   prng has the same initial state
       def eql?(other)
-        return false unless other.is_a?(self.class) && 
-          @lower == other.lower && 
-          @upper == other.upper && 
-          members == other.members &&
-          @generator == other.generator
+        return other.is_a?(self.class) &&
+               @lower == other.lower &&
+               @upper == other.upper &&
+               members == other.members &&
+               @generator == other.generator
       end
 
       # Return the type of the source distribution
@@ -64,8 +64,8 @@ module Statistical
       def members
         return @sdist.support
       end
-      
-      alias_method :==, :eql?
+
+      alias == eql?
       private :eql?
     end
   end

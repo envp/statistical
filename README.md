@@ -1,26 +1,12 @@
 # Statistical
 Statistical distributions in ruby. This library aims to provide and enhance an API that maintains familiarity with ruby's core and stdlib.
 
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'statistical'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install statistical
-
 ## Usage
 
-TODO: Write usage instructions here
+TODO: Write usage instructions here, see docs
+
+### Documentation
+Available [here](http://www.rubydoc.info/github/vaibhav-y/statistical/master).
 
 ## Development
 
@@ -33,9 +19,14 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
 
 
+## Roadmap
+### Immediate focus
+* Implementations of all common distributions mentioned in the NIST [engineering and statistics handbook](http://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm)
+
+### Long term
+* Add a module `Statistical::Hypothesis` which allows for statistical hypothesis testing
+* Explore creating a symbolic DSL using this library that involves manipulating random variates
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-## Documentation
-Available [here](http://www.rubydoc.info/github/vaibhav-y/statistical/master).

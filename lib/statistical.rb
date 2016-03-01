@@ -4,5 +4,4 @@ require 'statistical/rng'
 require 'core_extensions'
 
 module Statistical
-  
 end

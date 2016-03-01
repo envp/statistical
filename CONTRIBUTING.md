@@ -18,10 +18,5 @@ The default `rake` task is to run the tests
 * `bundle exec rake cop` - Run rubocop
 * `bundle exec rake doc` - Run yard to generate documentation
 
-
-## Roadmap
-* Implementations of all common distributions mentioned in the NIST [engineering and statistics handbook](http://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm)
-* Add a module `Statistical::Hypothesis` which allows for statistical hypothesis testing
-
 ## Notes
 Feel free to open a "question" issue if you have any questions or want to discuss about better ways to go about this.

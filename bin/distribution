@@ -8,7 +8,7 @@ require gem_base + '/lib/statistical'
 
 class String
   def camelcase
-    self.split('_').map(&:capitalize).join
+    split('_').map(&:capitalize).join
   end
 end
 
@@ -38,17 +38,16 @@ OptionParser.new do |opts|
 end
 
 ARGV.each do |distribution|
-  if needs_new
-    basename = distribution.downcase
-    raise 'You should be inside distribution lib directory' unless File.exist? 'statistical.gemspec'
-    raise 'Distribution already created' if File.exist? "#{gem_base}/lib/statistical/distribution/#{basename}.rb" and File.exist? "#{gem_base}/lib/statistical/rng/#{basename}.rb"
+  next unless needs_new
+  basename = distribution.downcase
+  raise 'You should be inside distribution lib directory' unless File.exist? 'statistical.gemspec'
+  raise 'Distribution already created' if File.exist?("#{gem_base}/lib/statistical/distribution/#{basename}.rb") && File.exist?("#{gem_base}/lib/statistical/rng/#{basename}.rb")
 
-    dist = ERB.new(File.read(gem_base + '/data/template/distribution.erb'))
-    rng = ERB.new(File.read(gem_base + '/data/template/rng.erb'))
-    spec = ERB.new(File.read(gem_base + '/data/template/spec.erb'))
+  dist = ERB.new(File.read(gem_base + '/data/template/distribution.erb'))
+  rng = ERB.new(File.read(gem_base + '/data/template/rng.erb'))
+  spec = ERB.new(File.read(gem_base + '/data/template/spec.erb'))
 
-    File.open("#{gem_base}/lib/statistical/distribution/#{basename}.rb", 'w') { |fp| fp.write(dist.result(binding)) }
-    File.open("#{gem_base}/lib/statistical/rng/#{basename}.rb", 'w') { |fp| fp.write(rng.result(binding)) }
-    File.open("#{gem_base}/spec/#{basename}_spec.rb", 'w') { |fp| fp.write(spec.result(binding)) }
-  end
+  File.open("#{gem_base}/lib/statistical/distribution/#{basename}.rb", 'w') { |fp| fp.write(dist.result(binding))}
+  File.open("#{gem_base}/lib/statistical/rng/#{basename}.rb", 'w') { |fp| fp.write(rng.result(binding))}
+  File.open("#{gem_base}/spec/#{basename}_spec.rb", 'w') { |fp| fp.write(spec.result(binding))}
 end

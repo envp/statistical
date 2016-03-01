@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'statistical'
 require 'statistics2'
-require 'codacy-coverage'
+require 'codeclimate-test-reporter'
 
-Codacy::Reporter.start
+CodeClimate::TestReporter.start

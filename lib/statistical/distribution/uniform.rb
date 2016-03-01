@@ -2,11 +2,11 @@ require 'statistical/exceptions'
 
 module Statistical
   module Distribution
-    # An abstraction of the common statistical properties of the uniform 
+    # An abstraction of the common statistical properties of the uniform
     # distribution. Provides a PDF, CDF, Inverse-CDF, mean, variance
     #
-    # @note If initialized with lower and upper parameters in reverse order, it 
-    #   swaps them. Eg. initializing with lower = 10 and upper = 2 is the same 
+    # @note If initialized with lower and upper parameters in reverse order, it
+    #   swaps them. Eg. initializing with lower = 10 and upper = 2 is the same
     #   as lower = 2 and upper = 10, due to the swap during call to new(,)
     #
     # @author Vaibhav Yenamandra
@@ -30,7 +30,7 @@ module Statistical
       #   #=> #<Statistical::Distribution::Uniform:0x00000001489be8 @lower=1, @upper=10>
       #
       # @author Vaibhav Yenamandra
-      # 
+      #
       # @param [Numeric] lower lower bound of the distribution.
       # @param [Numeric] upper upper bound of the distribution.
       # @return `Statistical::Distribution::Uniform` instance
@@ -38,11 +38,11 @@ module Statistical
         @lower = [lower, upper].min
         @upper = [lower, upper].max
       end
-      
+
       # Returns value of probability density function at a point
       #
       # @author Vaibhav Yenamandra
-      # 
+      #
       # @param [Numeric] x A real valued point
       # @return [Float] 1 if x is within [lower, upper], 0 otherwise
       def pdf(x)
@@ -53,7 +53,7 @@ module Statistical
       # Returns value of cumulative density function at a point
       #
       # @author Vaibhav Yenamandra
-      # 
+      #
       # @param [Numeric] x A real valued point
       # @return [Float] 1 if x is within [lower, upper], 0 otherwise
       def cdf(x)
@@ -67,7 +67,7 @@ module Statistical
       # @see #p_value
       #
       # @author Vaibhav Yenamandra
-      # 
+      #
       # @param [Numeric] p a value within [0, 1]
       # @return [Numeric] Inverse CDF for valid p
       # @raises [RangeError] if p > 1 or p < 0
@@ -76,10 +76,10 @@ module Statistical
         return @lower + p * (@upper - @lower)
       end
 
-      # Returns the expected value of mean value for the calling instance. 
+      # Returns the expected value of mean value for the calling instance.
       #
       # @author Vaibhav Yenamandra
-      # 
+      #
       # @param [Numeric] p a value within [0, 1]
       # @return [Float] Mean of the distribution
       def mean
@@ -89,7 +89,7 @@ module Statistical
       # Returns the expected value of variance for the calling instance.
       #
       # @author Vaibhav Yenamandra
-      # 
+      #
       # @param [Numeric] p a value within [0, 1]
       # @return [Float] Variance of the distribution
       def variance
@@ -100,20 +100,21 @@ module Statistical
       #   Available publicly as #==
       #
       # @author Vaibhav Yenamandra
-      # 
+      #
       # @private
       #
       # @param other A distribution object (preferred)
       # @return [Boolean] true if-and-only-if two instances are of the same
       #   class and have the same parameters.
       def eql?(other)
-        return false unless other.is_a?(Statistical::Distribution::Uniform) && @lower == other.lower && @upper == other.upper
-        return true
+        return other.is_a?(self.class) &&
+               @lower == other.lower &&
+               @upper == other.upper
       end
 
-      alias_method :==, :eql?
-      alias_method :p_value, :quantile
-      
+      alias == eql?
+      alias p_value quantile
+
       private :eql?
     end
   end

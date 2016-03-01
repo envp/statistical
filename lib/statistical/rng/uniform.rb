@@ -23,37 +23,39 @@ module Statistical
         @upper = dobj.upper
         @sdist = dobj
       end
-    
-    # Return the next random number from the sequence
-    #
-    # @author Vaibhav Yenamandra
-    #
-    # @return next random number in the sequence
+
+      # Return the next random number from the sequence
+      #
+      # @author Vaibhav Yenamandra
+      #
+      # @return next random number in the sequence
       def rand
         @lower + @generator.rand * (@upper - @lower)
       end
 
-    # Compare against another rng to see if they are the same
-    #
-    # @author Vaibhav Yenamandra
-    #
-    # @return true if and only if, source distributions are the same and the
-    #   prng has the same initial state
+      # Compare against another rng to see if they are the same
+      #
+      # @author Vaibhav Yenamandra
+      #
+      # @return [Boolean] true if and only if, source distributions are the same and the
+      #   prng has the same initial state
       def eql?(other)
-        return false unless other.is_a?(self.class) && @lower == other.lower && @upper == other.upper
-        @generator == other.generator
+        return false unless other.is_a?(self.class) &&
+                            @lower == other.lower &&
+                            @upper == other.upper &&
+                            @generator == other.generator
       end
-    
-    # Return the type of the source distribution
-    #
-    # @author Vaibhav Yenamandra
-    #
-    # @return source distribution's type
+
+      # Return the type of the source distribution
+      #
+      # @author Vaibhav Yenamandra
+      #
+      # @return [Statistical::Distribution::Uniform] source distribution's type
       def type
         @sdist.class
       end
 
-      alias_method :==, :eql?
+      alias == eql?
       private :eql?
     end
   end
