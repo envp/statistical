@@ -1,4 +1,7 @@
 # Statistical
+[![Code Climate](https://codeclimate.com/github/vaibhav-y/statistical/badges/gpa.svg)](https://codeclimate.com/github/vaibhav-y/statistical)
+[![Test Coverage](https://codeclimate.com/github/vaibhav-y/statistical/badges/coverage.svg)](https://codeclimate.com/github/vaibhav-y/statistical/coverage)
+
 Statistical distributions in ruby. This library aims to provide and enhance an API that maintains familiarity with ruby's core and stdlib.
 
 ## Usage
