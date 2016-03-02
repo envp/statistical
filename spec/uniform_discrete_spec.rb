@@ -3,10 +3,77 @@ require 'statistical/rng/uniform_discrete'
 require 'statistical/distribution/uniform_discrete'
 
 describe Statistical::Rng::UniformDiscrete do
-  it 'passes the G-test at a 95% significance level'
+  it 'passes the G-test at a 95% significance level' do
+    skip('FIXME: Not yet implemented')
+  end
 
-  describe '.new'
-  describe '#rand'
+  describe '.new' do
+    context 'when parameters are specified' do
+      let(:size) {10}
+      let(:elems) {Array.new(size) {rand}}
+      let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
+      let(:udist_cont) {Statistical::Distribution::Uniform.new}
+      let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
+      
+      it 'raises a TypeError if dobj is not UniformDiscrete' do
+        expect {
+          Statistical::Rng::UniformDiscrete.new(udist_cont)
+        }.to raise_error(TypeError)
+      end
+      
+      it 'sets the right lower bound' do
+        expect(udist_rng.lower).to eq(elems.min)
+      end
+      
+      it 'sets the right lower bound' do
+        expect(udist_rng.upper).to eq(elems.max)
+      end
+      
+      it 'source distribution has correct class' do
+        expect(udist_rng.type).to eq(udist.class)
+      end
+      
+    end
+  end
+
+  describe '#rand' do
+    let(:size) {10}
+    let(:seed) {Random.new_seed}
+    let(:elems) {Array.new(size) {rand}}
+    let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
+    let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
+    let(:udist_prng_a) {Statistical::Rng::UniformDiscrete.new(udist, seed)}
+    let(:udist_prng_b) {Statistical::Rng::UniformDiscrete.new(udist, seed)}
+    
+    # Non-deterministic, *given enough time* this will
+    # fail if the implementation is wrong! 
+    it 'only returns elements from the support set' do
+      expect(elems).to include(udist_rng.rand)
+    end
+    
+    it 'should be repeatable for a specific seed' do
+      expect(udist_prng_a).to eq(udist_prng_b)
+    end
+  end
+  
+  describe '#members' do
+    let(:size) {10}
+    let(:elems) {Array.new(size) {rand}}
+    let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
+    let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
+    
+    it {expect(udist_rng.members).to eq(udist.support)}
+  end
+  
+  describe '#type' do
+    let(:size) {10}
+    let(:elems) {Array.new(size) {rand}}
+    let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
+    let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
+    
+    # Should be same class as the source distribution
+    it {expect(udist_rng.type).to eq(udist.class)}
+  end
 end
 
 describe Statistical::Distribution::UniformDiscrete do
@@ -15,8 +82,8 @@ describe Statistical::Distribution::UniformDiscrete do
       let(:size) {10}
       let(:elems) {Array.new(size) {rand}}
       let(:arg_range) {0..9}
-      let(:arg_fixnum) {100}
-      let(:arg_bignum) {10000000000000000000000000000000000000000}
+      let(:arg_fixnum) {10**6}
+      let(:arg_bignum) {10**52}
       let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
 
       it 'accepts an array as an argument' do
@@ -172,17 +239,26 @@ describe Statistical::Distribution::UniformDiscrete do
 
   describe '#==' do
     context 'when compared against another Uniform distribution' do
+      let(:size) {10}
+      let(:elems) {Array.new(size) {rand}}
+      let(:elems_other) {Array.new(size) {rand}}
+      let(:udist_a) {Statistical::Distribution::UniformDiscrete.new(elems)}
+      let(:udist_clone) {Statistical::Distribution::UniformDiscrete.new(elems)}
+      let(:udist_b) {
+        Statistical::Distribution::UniformDiscrete.new(elems_other)
+      }
+      
       it 'returns `true` if they have the same parameters' do
-        skip("FIXME: Comparison currently broken")
+        expect(udist_a == udist_clone).to eq(true)
       end
 
       it 'returns `false` if they have different parameters' do
-        skip("FIXME: Comparison currently broken")
+        expect(udist_a == udist_b).to eq(false)
       end
     end
 
     context 'when compared against any distribution type' do
-      skip("FIXME: Comparison currently broken")
+      skip("FIXME: Not yet implemented")
     end
   end
 end

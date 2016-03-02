@@ -118,9 +118,7 @@ module Statistical
       #   class and have the same parameters.
       def eql?(other)
         return other.is_a?(self.class) &&
-               @lower == other.lower &&
-               @upper == other.upper &&
-               @step == other.step
+               @support == other.support
       end
 
       alias == eql?
