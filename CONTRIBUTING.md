@@ -18,5 +18,16 @@ The default `rake` task is to run the tests
 * `bundle exec rake cop` - Run rubocop
 * `bundle exec rake doc` - Run yard to generate documentation
 
+## Workflow / General Guidelines
+1. Fork this repository and create your feature branch
+2. All new code addition must be through the feature branch only. Changes to master will be rejected.
+3. Test your on code atleast 3 continuous major releases of ruby (you can setup travis-CI for this). Usually CURRENT_RUBY_VERSION and two major predecessors should be fine (2.3.X, 2.2.Y 2.1.W)
+4. Try to keep one commit per change (Optional, but better to be organized)
+5. If possible write a test case which confirms your change
+6. When submitting a change that chooses a specific algorithm over others available write your rationale behind the choice. Benchmarks comparing different algorithms would be highly appreciated.
+7. Yes, it's OK to pick an algorithm for simplicity of expression.
+8. Your pull request should attempt to explain the change you want to introduce
+
+
 ## Notes
 Feel free to open a "question" issue if you have any questions or want to discuss about better ways to go about this.
