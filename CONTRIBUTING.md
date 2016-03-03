@@ -67,7 +67,7 @@ Use C++ style comments only for temporary comments e.g. commenting out some code
 
 ### Ruby code
 
-`bundle exec rake cop` is your best friend here.
+`bundle exec rake cop` is your best friend.
 
 ## Notes
 Feel free to open a "question" issue if you have any questions or want to discuss about better ways to go about this.
