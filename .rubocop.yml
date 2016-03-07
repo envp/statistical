@@ -12,19 +12,21 @@
 Metrics/LineLength:
   Max: 80
   Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
     - 'statistical.gemspec'
 
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'lib/statistical.rb'
-    - 'lib/statistical/rng.rb'
-    - 'lib/statistical/rng/uniform.rb'
 
 # Indentation width must be 2 spaces
 Style/IndentationWidth:
   Enabled: true
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues.
@@ -32,7 +34,11 @@ Style/IndentationWidth:
 Style/HashSyntax:
   Enabled: true
   UseHashRocketsWithSymbolValues: true
-
+  Exclude:
+    - 'statistical.gemspec'
+    - 'spec/**/*'
+    - 'test/**/*'
+    
 # Cop supports --auto-correct.
 Style/MutableConstant:
   Enabled: true
@@ -42,6 +48,10 @@ Style/MutableConstant:
 Style/PercentLiteralDelimiters:
   Exclude:
     - 'statistical.gemspec'
+  Exclude:
+    - 'statistical.gemspec'
+    - 'spec/**/*'
+    - 'test/**/*'
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
@@ -49,6 +59,10 @@ Style/PercentLiteralDelimiters:
 Style/SpaceInsideBlockBraces:
   Enabled: true
   EnforcedStyle: no_space
+  Exclude:
+    - 'statistical.gemspec'
+    - 'spec/**/*'
+    - 'test/**/*'
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
@@ -58,6 +72,7 @@ Style/StringLiterals:
   Exclude:
     - 'statistical.gemspec'
     - 'bin/*'
+    - 'spec/**/*'
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -73,6 +88,8 @@ Style/TrailingWhitespace:
 # Cop supports --auto-correct.
 Style/UnneededPercentQ:
   Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
     - 'statistical.gemspec'
 
 # I'm fine with either

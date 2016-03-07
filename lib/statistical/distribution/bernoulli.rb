@@ -8,7 +8,7 @@ module Statistical
     #
     # @note The states used to represent success & failure must be Numeric.
     #   Using it on generic state lables can cause strange outcomes!
-    # 
+    #
     # @note state_failure < state_sucesss, for the sake of sanity.
     #
     # @author Vaibhav Yenamandra

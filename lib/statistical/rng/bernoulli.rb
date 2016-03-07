@@ -17,8 +17,8 @@ module Statistical
       # @attr_reader [Random] generator The PRNG being used for randomness
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::Bernoulli)
-          raise TypeError, 
-            "Expected Distribution object or nil, found #{dobj.class}"
+          raise TypeError,
+                "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Bernoulli.new if dobj.nil?
         super(dobj, seed)

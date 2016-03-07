@@ -14,25 +14,24 @@ describe Statistical::Rng::UniformDiscrete do
       let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
       let(:udist_cont) {Statistical::Distribution::Uniform.new}
       let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
-      
+
       it 'raises a TypeError if dobj is not UniformDiscrete' do
-        expect {
+        expect do
           Statistical::Rng::UniformDiscrete.new(udist_cont)
-        }.to raise_error(TypeError)
+        end.to raise_error(TypeError)
       end
-      
+
       it 'sets the right lower bound' do
         expect(udist_rng.lower).to eq(elems.min)
       end
-      
+
       it 'sets the right lower bound' do
         expect(udist_rng.upper).to eq(elems.max)
       end
-      
+
       it 'source distribution has correct class' do
         expect(udist_rng.type).to eq(udist.class)
       end
-      
     end
   end
 
@@ -44,33 +43,33 @@ describe Statistical::Rng::UniformDiscrete do
     let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
     let(:udist_prng_a) {Statistical::Rng::UniformDiscrete.new(udist, seed)}
     let(:udist_prng_b) {Statistical::Rng::UniformDiscrete.new(udist, seed)}
-    
+
     # Non-deterministic, *given enough time* this will
-    # fail if the implementation is wrong! 
+    # fail if the implementation is wrong!
     it 'only returns elements from the support set' do
       expect(elems).to include(udist_rng.rand)
     end
-    
+
     it 'should be repeatable for a specific seed' do
       expect(udist_prng_a).to eq(udist_prng_b)
     end
   end
-  
+
   describe '#members' do
     let(:size) {10}
     let(:elems) {Array.new(size) {rand}}
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
     let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
-    
+
     it {expect(udist_rng.members).to eq(udist.support)}
   end
-  
+
   describe '#type' do
     let(:size) {10}
     let(:elems) {Array.new(size) {rand}}
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
     let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
-    
+
     # Should be same class as the source distribution
     it {expect(udist_rng.type).to eq(udist.class)}
   end
@@ -87,27 +86,27 @@ describe Statistical::Distribution::UniformDiscrete do
       let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
 
       it 'accepts an array as an argument' do
-        expect {
+        expect do
           Statistical::Distribution::UniformDiscrete.new(elems)
-        }.not_to raise_error
+        end.not_to raise_error
       end
 
       it 'accepts a range as an argument' do
-        expect {
+        expect do
           Statistical::Distribution::UniformDiscrete.new(arg_range)
-        }.not_to raise_error
+        end.not_to raise_error
       end
 
       it 'accepts a single Fixnum as an argument' do
-        expect {
+        expect do
           Statistical::Distribution::UniformDiscrete.new(arg_fixnum)
-        }.not_to raise_error
+        end.not_to raise_error
       end
 
       it 'accepts a single Bignum as an argument' do
-        expect {
+        expect do
           Statistical::Distribution::UniformDiscrete.new(arg_bignum)
-        }.not_to raise_error
+        end.not_to raise_error
       end
 
       it 'sets the right lower bound' do
@@ -117,7 +116,7 @@ describe Statistical::Distribution::UniformDiscrete do
       it 'sets the right upper bound' do
         expect(udist.upper).to eq(elems.max)
       end
-      
+
       it 'sorts(asc) the element array given as an argument' do
         expect(udist.support).to eq(elems.sort)
       end
@@ -129,7 +128,7 @@ describe Statistical::Distribution::UniformDiscrete do
     let(:epsilon) {1e-9}
     let(:elems) {Array.new(size) {rand}}
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
-    
+
     context 'when called with x < lower_bound' do
       it {expect(udist.pdf(udist.lower - epsilon)).to eq(0)}
     end
@@ -142,7 +141,7 @@ describe Statistical::Distribution::UniformDiscrete do
       it 'should be evaluated correctly if x is a member of the support set' do
         expect(udist.pdf(elems[rand(size)])).to eq(1.fdiv(size))
       end
-      
+
       it 'should be 0 x is not a member of the support set' do
         expect(udist.pdf(elems[rand(size)] - epsilon)).to eq(0)
       end
@@ -154,7 +153,7 @@ describe Statistical::Distribution::UniformDiscrete do
     let(:epsilon) {1e-9}
     let(:elems) {Array.new(size) {rand}}
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
-    
+
     context 'when called with x < lower' do
       it {expect(udist.cdf(udist.lower - epsilon)).to eq(0)}
     end
@@ -179,7 +178,7 @@ describe Statistical::Distribution::UniformDiscrete do
     let(:ex) {elems[rand(size)] + rand}
     let(:size) {elems.length}
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
-    
+
     context 'when called for x > 1' do
       it {expect {udist.quantile(2)}.to raise_error(RangeError)}
     end
@@ -195,7 +194,7 @@ describe Statistical::Distribution::UniformDiscrete do
         x = udist.quantile(udist.cdf(ex))
         expect(ex.floor).to eq(x)
       end
-      
+
       it 'is inverted by the cdf(1) method' do
         p = rand
         el = (p * size).ceil
@@ -220,7 +219,7 @@ describe Statistical::Distribution::UniformDiscrete do
     let(:epsilon) {1e-9}
     let(:elems) {(1..10).to_a}
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
-    
+
     it 'should return the correct mean' do
       expect(udist.mean).to eq(elems.mean)
     end
@@ -231,7 +230,7 @@ describe Statistical::Distribution::UniformDiscrete do
     let(:epsilon) {1e-9}
     let(:elems) {(1..10).to_a}
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
-    
+
     it 'should return the correct variance for 1..10' do
       expect(udist.variance).to eq(elems.variance)
     end
@@ -244,10 +243,10 @@ describe Statistical::Distribution::UniformDiscrete do
       let(:elems_other) {Array.new(size) {rand}}
       let(:udist_a) {Statistical::Distribution::UniformDiscrete.new(elems)}
       let(:udist_clone) {Statistical::Distribution::UniformDiscrete.new(elems)}
-      let(:udist_b) {
+      let(:udist_b) do
         Statistical::Distribution::UniformDiscrete.new(elems_other)
-      }
-      
+      end
+
       it 'returns `true` if they have the same parameters' do
         expect(udist_a == udist_clone).to eq(true)
       end

@@ -18,8 +18,8 @@ module Statistical
       # @attr_reader [Random] generator The PRNG being used for randomness
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::TwoPoint)
-          raise TypeError, 
-            "Expected Distribution object or nil, found #{dobj.class}"
+          raise TypeError,
+                "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::TwoPoint.new if dobj.nil?
         @generator = Random.new(seed)
@@ -29,7 +29,7 @@ module Statistical
         @states = dobj.states
       end
 
-      # Return the next random number from the sequence following the given 
+      # Return the next random number from the sequence following the given
       # distribution
       #
       # @return next random number in the sequence
@@ -39,13 +39,13 @@ module Statistical
 
       # Compare against another rng to see if they are the same
       #
-      # @return [Boolean] true if and only if, source distributions are the same 
+      # @return [Boolean] true if and only if, source distributions are the same
       #   and the prng has the same initial state
       def eql?(other)
         return other.is_a?(self.class) &&
-          @p = other.p &&
-          @states == other.states &&
-          @generator == other.generator
+               @p = other.p &&
+                    @states == other.states &&
+                    @generator == other.generator
       end
 
       # Return the type of the source distribution
@@ -60,7 +60,7 @@ module Statistical
         @sdist.support
       end
 
-      alias_method :==, :eql?
+      alias == eql?
       private :eql?
     end
   end

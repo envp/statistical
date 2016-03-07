@@ -15,8 +15,8 @@ module Statistical
 
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::Uniform)
-          raise TypeError, 
-            "Expected Distribution object or nil, found #{dobj.class}"
+          raise TypeError,
+                "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Uniform.new if dobj.nil?
         @generator = Random.new(seed)
@@ -41,10 +41,10 @@ module Statistical
       # @return [Boolean] true if and only if, source distributions are the same and the
       #   prng has the same initial state
       def eql?(other)
-        return other.is_a?(self.class) && 
-                @lower == other.lower &&  
-                @upper == other.upper &&
-                @generator == other.generator
+        return other.is_a?(self.class) &&
+               @lower == other.lower &&
+               @upper == other.upper &&
+               @generator == other.generator
       end
 
       # Return the type of the source distribution

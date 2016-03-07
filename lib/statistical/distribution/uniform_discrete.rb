@@ -7,16 +7,16 @@ module Statistical
     #   of elements
     #
     # @author Vaibhav Yenamandra
-    # @attr_reader [Array, Numeric] support The support set of valid values a 
+    # @attr_reader [Array, Numeric] support The support set of valid values a
     # random variate from the distribution can take. Must have at least 1 value
     class UniformDiscrete
       attr_reader :count, :support, :lower, :upper
       # Returns a model for the discrete uniform distribution on all elements
       # present in the given set of elemets `elems`
       #
-      # @note The constructor sorts the array of elements given to it, as this 
+      # @note The constructor sorts the array of elements given to it, as this
       #   is a key assumption of the discrete uniform distribution. This set
-      #   must also be homogenous 
+      #   must also be homogenous
       #
       # @param [Array] elems The elements over which the distribution exists
       #   in [lower, upper]
@@ -31,8 +31,8 @@ module Statistical
         when Range
           @support = elems.to_a
         else
-          raise ArgumentError, 
-            "Expected Fixnum, Bignum, Array or Range, found #{elems.class}"
+          raise ArgumentError,
+                "Expected Fixnum, Bignum, Array or Range, found #{elems.class}"
         end
         @count = @support.length
         @lower = @support[0]
@@ -58,17 +58,18 @@ module Statistical
       #   start appearing when dealing with precision > 1E-18
       #
       # @param [Fixnum, Bignum] k Point at which cdf value is desired
-      # @return [Float]  0 if k is on the left of the support, 
+      # @return [Float]  0 if k is on the left of the support,
       #   1 if k on the right support and the
       #   evaluates CDF for any other legal value
       def cdf(k)
         return 0.0 if k < @lower
         return 1.0 if k >= @upper
-        
+
         # Ruby has a Array#bsearch_index already but it supports find-min mode
         # What we need is a find-max mode. This can be achieved by reversing
         # and then searching, but reverse is O(N) so it defeats the purpose
-        low, high = 0, @count - 1
+        low = 0
+        high = @count - 1
         while low < high
           mid = (low + high) / 2
           if @support[mid] <= k
@@ -81,7 +82,7 @@ module Statistical
         return low.fdiv(@count)
       end
 
-      # Returns value of inverse CDF for a given probability. 
+      # Returns value of inverse CDF for a given probability.
       #
       # @see #p_value
       #
@@ -92,7 +93,7 @@ module Statistical
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
         return @lower if p.zero?
         return @upper if (p - 1).zero?
-        return @support[(p * count).ceil -  1]
+        return @support[(p * count).ceil - 1]
       end
 
       # Returns the mean value for the calling instance. Calculated mean, and

@@ -19,13 +19,13 @@ module Statistical
       #
       # @author Vaibhav Yenamandra
       #
-      # @param [Statistical::Distribution::UniformDiscrete] dobj The 
+      # @param [Statistical::Distribution::UniformDiscrete] dobj The
       #   distribution object to be used to create the RNG
       # @param [Random] seed Seed to set the PRNG initial state
       def initialize(dobj, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::UniformDiscrete)
-          raise TypeError, 
-            "Expected Distribution object or nil, found #{dobj.class}"
+          raise TypeError,
+                "Expected Distribution object or nil, found #{dobj.class}"
         end
         @generator = Random.new(seed)
         @lower = dobj.lower
@@ -43,7 +43,7 @@ module Statistical
         return members[@generator.rand(n)]
       end
 
-      # Compare against another rng. Compares distribution parameters and 
+      # Compare against another rng. Compares distribution parameters and
       # initial state of rngs to assert equality
       #
       # @private
