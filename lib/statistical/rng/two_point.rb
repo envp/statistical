@@ -1,6 +1,5 @@
 require 'statistical/exceptions'
 require 'statistical/distribution/two_point'
-require 'statistical/distrbution/uniform'
 
 module Statistical
   module Rng
@@ -23,7 +22,7 @@ module Statistical
             "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::TwoPoint.new if dobj.nil?
-        @generator = Statistical::Distribution::Uniform.new(0, 1, seed)
+        @generator = Random.new(seed)
         @sdist = dobj
         @p = dobj.p
         @q = dobj.q
@@ -35,7 +34,6 @@ module Statistical
       #
       # @return next random number in the sequence
       def rand
-        udist = Statistical::Distribution::Uniform.new
         return @sdist.quantile(@generator.rand)
       end
 
@@ -44,9 +42,9 @@ module Statistical
       # @return [Boolean] true if and only if, source distributions are the same 
       #   and the prng has the same initial state
       def eql?(other)
-        return false unless other.is_a?(self.class) &&
+        return other.is_a?(self.class) &&
           @p = other.p &&
-          @states = other.states &&
+          @states == other.states &&
           @generator == other.generator
       end
 
@@ -55,6 +53,11 @@ module Statistical
       # @return source distribution's type
       def type
         @sdist.class
+      end
+
+      # The support set over which the distribution exists
+      def support
+        @sdist.support
       end
 
       alias_method :==, :eql?

@@ -27,22 +27,27 @@ module Statistical
       # @note The states used to represent success & failure must be Numeric.
       #   Using it on generic state lables can cause strange outcomes!
       # 
-      # @note state_failure < state_sucesss, for the sake of sanity.
+      # @note state_failure < state_sucesss, required to have a sane CDF.
       #
       # @param [Float] prob_success The probability of success
       # @param [Numeric] state_success An object to describe the 1-state of 
       #   success
       # @param [Numeric] state_failure An object to describe the 0-state of 
       #   failure
-      def initialize(prob_success = 0.5, state_success = 1, state_failure = 0)
+      def initialize(prob_success = 0.5, state_failure = 0, state_success = 1)
         if state_failure == state_success
           raise ArgumentError, 
-            "Success & failure must be two distinct states, that are Comparable" 
+            "Success & failure must be two distinct states" 
         end
         
         if state_failure > state_success
           raise ArgumentError, 
             "Failure state must be smaller that the success state!"  
+        end
+        
+        unless (state_failure + state_success).is_a?(Numeric)
+          raise ArgumentError,
+            "States must be Numeric! Found #{state_failure.class} and #{state_success.class}"
         end
         
         if prob_success > 1 || prob_success < 0
@@ -67,11 +72,6 @@ module Statistical
       # @raise [ArgumentError] if x is not of the states this instance was
       #   initialized with
       def pdf(x)
-        unless @states.values.include?(x)
-          raise ArgumentError, 
-            "#{x} is not a pre-defined state. Must be one of:" + 
-            " #{@states.values.inspect}"
-        end
         return @p if @states[:success] == x
         return @q if @states[:failure] == x
         return 0
@@ -117,6 +117,11 @@ module Statistical
           (mean ** 2)
       end
 
+      # The support set over which the distribution exists
+      def support
+        return @states.values.sort
+      end
+
       # Compares two distribution instances and returns a boolean outcome
       #   Available publicly as #==
       #
@@ -131,7 +136,7 @@ module Statistical
       def eql?(other)
         return other.is_a?(self.class) &&
           @p == other.p &&
-          @states = other.states
+          @states == other.states
       end
 
       alias_method :==, :eql?

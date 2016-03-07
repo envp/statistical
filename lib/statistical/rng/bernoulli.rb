@@ -1,6 +1,6 @@
 require 'statistical/exceptions'
 require 'statistical/distribution/bernoulli'
-require 'statistical/distrbution/uniform'
+require 'statistical/rng/two_point'
 
 module Statistical
   module Rng
@@ -23,5 +23,6 @@ module Statistical
         dobj = Statistical::Distribution::Bernoulli.new if dobj.nil?
         super(dobj, seed)
       end
+    end
   end
 end
