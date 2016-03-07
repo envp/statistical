@@ -20,6 +20,8 @@ module Statistical
       #
       # @param [Array] elems The elements over which the distribution exists
       #   in [lower, upper]
+      # @raises [RangeError] if elems isn't one of Array, Range, Fixnum or
+      #   Bignum
       def initialize(elems)
         case elems
         when Fixnum, Bignum
@@ -35,6 +37,7 @@ module Statistical
         @count = @support.length
         @lower = @support[0]
         @upper = @support[-1]
+        self
       end
 
       # Returns value of probability density function at a point on the real

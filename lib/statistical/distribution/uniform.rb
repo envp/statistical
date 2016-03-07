@@ -37,6 +37,7 @@ module Statistical
       def initialize(lower = 0.0, upper = 1.0)
         @lower = [lower, upper].min
         @upper = [lower, upper].max
+        self
       end
 
       # Returns value of probability density function at a point

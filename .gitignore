@@ -10,3 +10,5 @@
 /1000/**
 /codacy-coverage/**
 /coverage/**
+*.so
+*.o
