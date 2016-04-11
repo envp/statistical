@@ -1,5 +1,6 @@
 require 'statistical/exceptions'
 require 'statistical/distribution/two_point'
+require 'statistical/distribution/uniform'
 
 module Statistical
   module Rng
@@ -15,14 +16,14 @@ module Statistical
       # @attr_reader [Float] p Probability of success state
       # @attr_reader [Float] q Probability of failure state
       # @attr_reader [Hash] states Possible states that the RNG can take up
-      # @attr_reader [Random] generator The PRNG being used for randomness
+      # @attr_reader [Object] generator The PRNG being used for randomness
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::TwoPoint)
           raise TypeError,
                 "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::TwoPoint.new if dobj.nil?
-        @generator = Random.new(seed)
+        @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
         @sdist = dobj
         @p = dobj.p
         @q = dobj.q

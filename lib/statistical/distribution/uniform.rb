@@ -31,12 +31,12 @@ module Statistical
       #
       # @author Vaibhav Yenamandra
       #
-      # @param [Numeric] lower lower bound of the distribution.
-      # @param [Numeric] upper upper bound of the distribution.
+      # @param [Numeric] start lower bound of the distribution.
+      # @param [Numeric] finish upper bound of the distribution.
       # @return `Statistical::Distribution::Uniform` instance
-      def initialize(lower = 0.0, upper = 1.0)
-        @lower = [lower, upper].min
-        @upper = [lower, upper].max
+      def initialize(start = 0.0, finish = 1.0)
+        @lower = [start, finish].min
+        @upper = [start, finish].max
         self
       end
 
