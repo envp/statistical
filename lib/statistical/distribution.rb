@@ -2,6 +2,7 @@ require 'statistical/distribution/uniform'
 require 'statistical/distribution/uniform_discrete'
 require 'statistical/distribution/two_point'
 require 'statistical/distribution/bernoulli'
+require 'statistical/distribution/exponential'
 
 module Statistical
   module Distribution
