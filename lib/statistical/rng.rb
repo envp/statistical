@@ -1,5 +1,8 @@
 require 'statistical/rng/uniform'
 require 'statistical/rng/uniform_discrete'
+require 'statistical/rng/two_point'
+require 'statistical/rng/bernoulli'
+require 'statistical/rng/exponential'
 
 module Statistical
   module Rng

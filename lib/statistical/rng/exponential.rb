@@ -22,7 +22,7 @@ module Statistical
             "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Exponential.new if dobj.nil?
-        @generator = Rng::Uniform.new(Distribution::Uniform.new(seed))
+        @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
         @rate = dobj.rate
         @sdist = dobj
       end

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'statistical/rng/two_point'
 require 'statistical/distribution/two_point'
 
-describe Statistical::Rng::Bernoulli do
+describe Statistical::Rng::TwoPoint do
   it 'passes the G-test at a 95% significance level' do
     skip('FIXME: Not implemented yet')
   end
@@ -88,7 +88,7 @@ describe Statistical::Rng::Bernoulli do
   end
 end
 
-describe Statistical::Distribution::Bernoulli do
+describe Statistical::Distribution::TwoPoint do
   describe '.new' do
     context 'when called with no arguments' do
       let(:tdist) {Statistical::Distribution::TwoPoint.new}
