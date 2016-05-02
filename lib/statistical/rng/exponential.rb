@@ -5,7 +5,6 @@ require 'statistical/rng/uniform'
 
 module Statistical
   module Rng
-
     # Companion RNG class for the exponential distribution. Requires a
     #   distrbution object of the corresponding distribution
     #
@@ -15,11 +14,11 @@ module Statistical
     # @attr_reader [Numeric] upper The upper bound of the uniform distribution.dist
     class Exponential
       attr_reader :rate, :generator
-      
+
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::Exponential)
-          raise TypeError, 
-            "Expected Distribution object or nil, found #{dobj.class}"
+          raise TypeError,
+                "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Exponential.new if dobj.nil?
         @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
@@ -40,8 +39,8 @@ module Statistical
       #   prng has the same initial state
       def eql?(other)
         return other.is_a?(self.class) &&
-                @generator == other.generator &&
-                @rate = other.rate
+               @generator == other.generator &&
+               @rate = other.rate
       end
 
       # Return the type of the source distribution
@@ -51,7 +50,7 @@ module Statistical
         @sdist.class
       end
 
-      alias_method :==, :eql?
+      alias == eql?
       private :eql?
     end
   end
