@@ -11,7 +11,7 @@ module Statistical
     # @author Vaibhav Yenamandra
     #
     # @attr_reader [Numeric] rate Rate parameter of the exponential distribution
-    # @attr_reader [Numeric] upper The upper bound of the uniform distribution.dist
+    # @attr_reader [Numeric] upper The upper bound of the uniform distribution
     class Exponential
       attr_reader :rate, :generator
 

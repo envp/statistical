@@ -15,6 +15,12 @@ Metrics/LineLength:
     - 'spec/**/*'
     - 'test/**/*'
     - 'statistical.gemspec'
+    - 'bin/distribution'
+
+# 10 lines won't be enough for math oriented code
+# 25 decided upon arbitrarily
+Metrics/MethodLength:
+  Max: 25
 
 Style/Documentation:
   Exclude:

@@ -5,6 +5,8 @@ require 'statistical/rng/bernoulli'
 require 'statistical/rng/exponential'
 
 module Statistical
+  # Factory module to create instances of the various classes 
+  # nested under itself
   module Rng
     # @private
     # No need to document this
@@ -12,8 +14,12 @@ module Statistical
     def self.const_missing(cname)
       const_set(cname, make_classmap) if cname == :RNG_TYPES
     end
-
+    
+    # Creates a new instance of the give type if the type was found.
+    # 
+    # @raises ArgumentError If the give type parameter was not found
     def self.create(type = :uniform, *args, &block)
+      raise ArgumentError unless RNG_TYPES.include?(type)
       RNG_TYPES[type].new(*args, &block)
     end
 

@@ -44,8 +44,9 @@ module Statistical
       #   line
       #
       # @param [Fixnum, Bignum] k Point at which pdf is desired
-      # @return [Float] 0 if k doesn't belong to the elements over which the current
-      #   instance is distributed. 1/n otherwise where n is number of elements
+      # @return [Float] 0 if k doesn't belong to the elements over which the
+      #   current instance is distributed. 1/n otherwise where n is number
+      #   of elements
       def pdf(k)
         return 1.0 / @count if @support.include?(k)
         return 0.0

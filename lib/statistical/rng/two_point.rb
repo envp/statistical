@@ -4,6 +4,9 @@ require 'statistical/distribution/uniform'
 
 module Statistical
   module Rng
+    # Random number generator to model the two point distribution used for
+    # working with problem where the state space has only two points with
+    # distinct probabilities
     class TwoPoint
       attr_reader :generator, :p, :q, :states
 

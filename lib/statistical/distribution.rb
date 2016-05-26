@@ -5,6 +5,8 @@ require 'statistical/distribution/bernoulli'
 require 'statistical/distribution/exponential'
 
 module Statistical
+  # Factory module used to create instances of various distributions classes
+  # nested under itself
   module Distribution
     # @private
     # No need to document this
@@ -13,7 +15,10 @@ module Statistical
       const_set(cname, make_classmap) if cname == :DISTRIBUTION_TYPES
     end
 
+    # Create a distribution identified by the type hash
+    # @raises ArgumentError if `type` was not found
     def self.create(type = :uniform, *args, &block)
+      raise ArgumentError unless DISTRIBUTION_TYPES.include?(type)
       DISTRIBUTION_TYPES[type].new(*args, &block)
     end
 

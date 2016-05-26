@@ -21,13 +21,6 @@ module Statistical
       # Returns a new `Statistical::Distribution::Uniform` instance
       #
       # @note if given lower > upper, it swaps them internally
-      # @example Initialize with lower > upper:
-      #   Statistical::Distribution.create(:uniform, 10, 1)
-      #   #=> #<Statistical::Distribution::Uniform:0x00000001489be8 @lower=1, @upper=10>
-      #
-      # @example Initialize with lower < upper:
-      #   Statistical::Distribution.create(:uniform, 1, 10)
-      #   #=> #<Statistical::Distribution::Uniform:0x00000001489be8 @lower=1, @upper=10>
       #
       # @author Vaibhav Yenamandra
       #

@@ -4,6 +4,8 @@ require 'statistical/rng/two_point'
 
 module Statistical
   module Rng
+    # This class models a bernoulli trial using the TwoPoint distribution as
+    # as base distribution / trial system.
     class Bernoulli < TwoPoint
       # Companion RNG class for the Bernoulli distribution. Requires a
       # distrbution object of the same type. Defaults to standard bernoulli

@@ -38,8 +38,8 @@ module Statistical
       #
       # @author Vaibhav Yenamandra
       #
-      # @return [Boolean] true if and only if, source distributions are the same and the
-      #   prng has the same initial state
+      # @return [Boolean] true if and only if, source distributions are the
+      #   same and the prng has the same initial state
       def eql?(other)
         return other.is_a?(self.class) &&
                @lower == other.lower &&
