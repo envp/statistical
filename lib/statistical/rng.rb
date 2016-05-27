@@ -3,6 +3,7 @@ require 'statistical/rng/uniform_discrete'
 require 'statistical/rng/two_point'
 require 'statistical/rng/bernoulli'
 require 'statistical/rng/exponential'
+require 'statistical/rng/laplace'
 
 module Statistical
   # Factory module to create instances of the various classes 

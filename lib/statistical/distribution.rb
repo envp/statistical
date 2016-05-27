@@ -3,6 +3,7 @@ require 'statistical/distribution/uniform_discrete'
 require 'statistical/distribution/two_point'
 require 'statistical/distribution/bernoulli'
 require 'statistical/distribution/exponential'
+require 'statistical/distribution/laplace'
 
 module Statistical
   # Factory module used to create instances of various distributions classes

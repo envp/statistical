@@ -1,5 +1,5 @@
 require 'statistical/exceptions'
-require 'statistical/distribution/Laplace'
+require 'statistical/distribution/laplace'
 
 module Statistical
   module Rng
@@ -19,7 +19,7 @@ module Statistical
           raise TypeError, "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Laplace.new if dobj.nil?
-        @generator = Random.new(seed)
+        @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
         @scale = dobj.scale
         @location = dobj.location
         @sdist = dobj

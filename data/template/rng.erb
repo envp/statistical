@@ -18,7 +18,7 @@ module Statistical
           raise TypeError, "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::<%= distribution.capitalize.camelcase %>.new if dobj.nil?
-        @generator = Random.new(seed)
+        @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
         # Map other parameters here
         @sdist = dobj
       end

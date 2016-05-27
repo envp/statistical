@@ -20,7 +20,7 @@ module Statistical
       # @param [Numeric] location Location parameter to determine where the 
       #   distribution is centered / where the mean lies at
       # @return `Statistical::Distribution::Laplace` instance      
-      def initialize(scale = 1, location = 0)
+      def initialize(location = 0, scale = 1)
         @scale = scale
         @location = location
         self
@@ -31,7 +31,7 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return [Float] Probility density function evaluated at x
       def pdf(x)
-        x_ = Math.abs((x - @location).fdiv @scale)
+        x_ = (x - @location).abs.fdiv @scale
         return Math.exp(- x_).fdiv(2 * @scale)
       end
 
@@ -60,9 +60,9 @@ module Statistical
         return @location if p == 0.5
         
         if p < 0.5
-          return @scale * log(2 * p) + @location
+          return @scale * Math.log(2 * p) + @location
         else
-          return @location - @scale * log(1.0 - p)
+          return @location - @scale * Math.log(2 * (1.0 - p))
         end
       end
 
