@@ -106,8 +106,8 @@ module Statistical
                @upper == other.upper
       end
 
-      alias == eql?
-      alias p_value quantile
+      alias :== :eql?
+      alias :p_value :quantile
 
       private :eql?
     end

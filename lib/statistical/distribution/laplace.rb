@@ -21,7 +21,7 @@ module Statistical
       #   distribution is centered / where the mean lies at
       # @return `Statistical::Distribution::Laplace` instance
       def initialize(location = 0, scale = 1)
-        @scale = scale
+        @scale = scale:
         @location = location
         self
       end
@@ -95,8 +95,8 @@ module Statistical
         return true
       end
 
-      alias == eql?
-      alias p_value quantile
+      alias :== :eql?
+      alias :p_value :quantile
 
       private :eql?
     end

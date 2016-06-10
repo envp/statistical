@@ -80,8 +80,8 @@ module Statistical
         return other.is_a?(self.class) && @rate == other.rate
       end
 
-      alias == eql?
-      alias p_value quantile
+      alias :== :eql?
+      alias :p_value :quantile
 
       private :eql?
     end

@@ -139,8 +139,8 @@ module Statistical
                @states == other.states
       end
 
-      alias == eql?
-      alias p_value quantile
+      alias :== :eql?
+      alias :p_value :quantile
 
       private :eql?
     end

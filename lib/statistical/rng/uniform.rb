@@ -56,7 +56,7 @@ module Statistical
         @sdist.class
       end
 
-      alias == eql?
+      alias :== :eql?
       private :eql?
     end
   end

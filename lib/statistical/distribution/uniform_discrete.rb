@@ -126,8 +126,8 @@ module Statistical
                @support == other.support
       end
 
-      alias == eql?
-      alias p_value quantile
+      alias :== :eql?
+      alias :p_value :quantile
 
       private :eql?
     end
