@@ -8,26 +8,26 @@ module Statistical
     #
     # @author Vaibhav Yenamandra
     # @attr_reader [Numeric] scale Scale parameter of the Laplace distribution.
-    # @attr_reader [Numeric] location Location parameter to determine where the 
+    # @attr_reader [Numeric] location Location parameter to determine where the
     #   distribution is centered / where the mean lies at
     class Laplace
       attr_reader :scale, :location
 
       # Returns a new instance of the Laplace distribution; also known as
       #   the two-sided exponential distribution
-      # 
+      #
       # @param [Numeric] scale Scale parameter of the Laplace distribution.
-      # @param [Numeric] location Location parameter to determine where the 
+      # @param [Numeric] location Location parameter to determine where the
       #   distribution is centered / where the mean lies at
-      # @return `Statistical::Distribution::Laplace` instance      
+      # @return `Statistical::Distribution::Laplace` instance
       def initialize(location = 0, scale = 1)
         @scale = scale
         @location = location
         self
       end
-      
+
       # Returns value of probability density function at a point.
-      # 
+      #
       # @param [Numeric] x A real valued point
       # @return [Float] Probility density function evaluated at x
       def pdf(x)
@@ -36,29 +36,29 @@ module Statistical
       end
 
       # Returns value of cumulative density function at a point.
-      # 
+      #
       # @param [Numeric] x A real valued point
       # @return [Float] Cumulative density function evaluated at x
       def cdf(x)
         return 0.5 if x == @location
         if x < @location
-          return 0.5 * Math.exp( (x - @location).fdiv @scale )
+          return 0.5 * Math.exp((x - @location).fdiv @scale)
         else
-          return 1.0 - 0.5 * Math.exp( (@location - x).fdiv @scale )
+          return 1.0 - 0.5 * Math.exp((@location - x).fdiv @scale)
         end
       end
 
       # Returns value of inverse CDF for a given probability
       #
       # @see #p_value
-      # 
+      #
       # @param [Numeric] p a value within [0, 1]
       # @return Inverse CDF for valid p
       # @raises [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
         return @location if p == 0.5
-        
+
         if p < 0.5
           return @scale * Math.log(2 * p) + @location
         else
@@ -66,7 +66,7 @@ module Statistical
         end
       end
 
-      # Returns the expected mean value for the calling instance. 
+      # Returns the expected mean value for the calling instance.
       #
       # @return Mean of the distribution
       def mean
@@ -90,14 +90,14 @@ module Statistical
       #   class and have the same parameters.
       def eql?(other)
         return false unless other.is_a?(self.class) &&
-          other.scale == @scale &&
-          other.location == @location
+                            other.scale == @scale &&
+                            other.location == @location
         return true
       end
 
-      alias_method :==, :eql?
-      alias_method :p_value, :quantile
-      
+      alias == eql?
+      alias p_value quantile
+
       private :eql?
     end
   end

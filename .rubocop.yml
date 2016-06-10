@@ -101,3 +101,7 @@ Style/UnneededPercentQ:
 # I'm fine with either
 Style/RedundantReturn:
   Enabled: false
+
+# Allow non-ascii characters in comments
+Style/AsciiComments:
+  Enabled: false
