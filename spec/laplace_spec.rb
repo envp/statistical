@@ -11,11 +11,11 @@ describe Statistical::Rng::Laplace do
     context 'when called with no arguments' do
       let(:ldist) {Statistical::Distribution::Laplace.new}
       let(:lrng)  {Statistical::Rng::Laplace.new(ldist)}
-      
+
       it 'should be located at x = 0' do
         expect(lrng.location).to eq(0)
       end
-      
+
       it 'should have scale = 1' do
         expect(lrng.scale).to eq(1)
       end
@@ -26,11 +26,11 @@ describe Statistical::Rng::Laplace do
       let(:scl)   {rand + 0.1}
       let(:ldist) {Statistical::Distribution::Laplace.new(loc, scl)}
       let(:lrng)  {Statistical::Rng::Laplace.new(ldist)}
-      
+
       it 'should have the right location parameter' do
         expect(lrng.location).to eq(loc)
       end
-      
+
       it 'should have the right scale parameter' do
         expect(lrng.scale).to eq(scl)
       end
@@ -43,7 +43,7 @@ describe Statistical::Rng::Laplace do
       let(:ldist)   {Statistical::Distribution::Laplace.new(loc, scl)}
       let(:lrng_a)  {Statistical::Rng::Laplace.new(ldist, seed)}
       let(:lrng_b)  {Statistical::Rng::Laplace.new(ldist, seed)}
-      
+
       it 'should be repeatable for the same arguments' do
         expect(lrng_a.rand).to eq(lrng_b.rand)
       end
@@ -56,7 +56,7 @@ describe Statistical::Rng::Laplace do
     let(:seed)    {Random.new_seed}
     let(:ldist)   {Statistical::Distribution::Laplace.new(loc, scl)}
     let(:lrng)  {Statistical::Rng::Laplace.new(ldist, seed)}
-    
+
     it 'returns a positive value' do
       expect(lrng.rand).to be > 0
     end
@@ -69,15 +69,15 @@ describe Statistical::Rng::Laplace do
       let(:scl_a)     {rand + 0.1}
       let(:scl_b)     {rand + 0.1}
       let(:seed)      {Random.new_seed}
-      
+
       let(:ldist_a)   {Statistical::Distribution::Laplace.new(loc_a, scl_a)}
       let(:ldist_b)   {Statistical::Distribution::Laplace.new(loc_b, scl_b)}
       let(:ldist_c)   {Statistical::Distribution::Laplace.new(loc_a, scl_a)}
-      
+
       let(:lrng_a)    {Statistical::Rng::Laplace.new(ldist_a, seed)}
       let(:lrng_b)    {Statistical::Rng::Laplace.new(ldist_b, seed)}
       let(:lrng_c)    {Statistical::Rng::Laplace.new(ldist_c, seed)}
-      
+
       it 'should return true if the bounds and seed are the same' do
         expect(lrng_a == lrng_c).to be true
       end

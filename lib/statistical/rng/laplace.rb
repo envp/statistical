@@ -16,8 +16,8 @@ module Statistical
 
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::Laplace)
-          raise TypeError, 
-            "Expected Distribution object or nil, found #{dobj.class}"
+          raise TypeError,
+                "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Laplace.new if dobj.nil?
         @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
@@ -39,9 +39,9 @@ module Statistical
       #   prng has the same initial state
       def eql?(other)
         return other.is_a?(self.class) &&
-          other.generator == @generator &&
-          other.location == @location &&
-          other.scale == @scale
+               other.generator == @generator &&
+               other.location == @location &&
+               other.scale == @scale
       end
 
       # Return the type of the source distribution
