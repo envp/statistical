@@ -26,7 +26,7 @@ module Statistical
                 "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::TwoPoint.new if dobj.nil?
-        @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
+        @generator = Random.new(seed)
         @sdist = dobj
         @p = dobj.p
         @q = dobj.q
