@@ -4,6 +4,7 @@ require 'statistical/distribution/two_point'
 require 'statistical/distribution/bernoulli'
 require 'statistical/distribution/exponential'
 require 'statistical/distribution/laplace'
+require 'statistical/distribution/weibull'
 
 module Statistical
   # Factory module used to create instances of various distributions classes
