@@ -12,10 +12,10 @@ module Statistical
   module Rng
     class Weibull
       attr_reader :generator, :scale, :shape
-      
+
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::Weibull)
-          raise TypeError, 
+          raise TypeError,
                 "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::Weibull.new if dobj.nil?

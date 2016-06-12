@@ -38,9 +38,9 @@ describe Statistical::Rng::Exponential do
   describe '#rand' do
     let(:erng) {Statistical::Rng::Exponential.new}
     let(:bound) {rand}
-    
+
     it 'passes the G-test at a 95% significance level'
-    
+
     it 'returns a positive number by default' do
       expect(erng.rand).to be > 0
     end

@@ -105,3 +105,6 @@ Style/RedundantReturn:
 # Allow non-ascii characters in comments
 Style/AsciiComments:
   Enabled: false
+  
+Style/Alias:
+  Enabled: false

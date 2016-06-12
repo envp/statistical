@@ -72,7 +72,6 @@ describe Statistical::Rng::Weibull do
   end
 end
 
-
 describe Statistical::Distribution::Weibull do
   describe '.new' do
     context 'when called with no arguments' do
@@ -118,8 +117,8 @@ describe Statistical::Distribution::Weibull do
       it 'returns a value consistent with the weibull PDF' do
         expect(wdist.pdf(x)).to eq(
           (shape / scale) *
-          ((x / scale) ** (shape - 1)) *
-          Math.exp(-(x / scale) ** shape)
+          ((x / scale)**(shape - 1)) *
+          Math.exp(-(x / scale)**shape)
         )
       end
     end
@@ -139,9 +138,8 @@ describe Statistical::Distribution::Weibull do
       let(:x)     {rand}
 
       it 'returns a value consistent with the weibull PMF' do
-        expect(wdist.cdf(x)).to be_within(Float::EPSILON).of(1 - Math.exp(-(x / scale) ** shape))
+        expect(wdist.cdf(x)).to be_within(Float::EPSILON).of(1 - Math.exp(-(x / scale)**shape))
       end
-
     end
   end
 
@@ -164,11 +162,11 @@ describe Statistical::Distribution::Weibull do
       let(:wdist) {Statistical::Distribution::Weibull.new(scale, shape)}
       let(:x)     {rand}
 
-      it {
+      it do
         expect(wdist.quantile(x)).to be_within(Float::EPSILON).of(
-          scale * ((-Math.log(1 - x)) ** (1 / shape))
+          scale * ((-Math.log(1 - x))**(1 / shape))
         )
-      }
+      end
     end
   end
 
@@ -202,8 +200,8 @@ describe Statistical::Distribution::Weibull do
 
     it 'should return the correct variance' do
       expect(wdist.variance).to be_within(Float::EPSILON).of(
-        (scale ** 2) * (
-          Math.gamma(1 + 2 / shape) - (Math.gamma(1 + 1 / shape)) ** 2
+        (scale**2) * (
+          Math.gamma(1 + 2 / shape) - Math.gamma(1 + 1 / shape)**2
         )
       )
     end

@@ -13,59 +13,60 @@ module Statistical
       attr_reader :scale, :shape
 
       # Returns a new `Statistical::Distribution::Weibull` instance
-      # 
-      # @param [Types] param_name Description 
-      # @return `Statistical::Distribution::Weibull` instance      
+      #
+      # @param [Numeric] scale The distribution's scale parameter
+      # @param [Numeric] shape The distribution's shape parameter
+      # @return `Statistical::Distribution::Weibull` instance
       def initialize(scale = 1, shape = 1)
         @scale = scale.to_f
         @shape = shape.to_f
       end
-      
-      # Returns value of probability density function at a point. Calculated 
+
+      # Returns value of probability density function at a point. Calculated
       #   using some technique that you might want to name
-      # 
+      #
       # @param [Numeric] x A real valued point
-      # @return 
+      # @return
       def pdf(x)
         return 0 if x <= 0
-        
-        return (@shape / @scale) * 
-               ((x / @scale) ** (@shape - 1)) * 
-               Math.exp(-((x / @scale) ** @shape))
+
+        return (@shape / @scale) *
+               ((x / @scale)**(@shape - 1)) *
+               Math.exp(-((x / @scale)**@shape))
       end
 
-      # Returns value of cumulative density function at a point. Calculated 
+      # Returns value of cumulative density function at a point. Calculated
       #   using some technique that you might want to name
-      # 
+      #
       # @param [Numeric] x A real valued point
-      # @return 
+      # @return
       def cdf(x)
         return 0 if x <= 0
-        xa = (x / @scale) ** @shape
+        xa = (x / @scale)**@shape
         return 1 - Math.exp(-xa)
       end
 
       # Returns value of inverse CDF for a given probability
       #
       # @see #p_value
-      # 
+      #
       # @param [Numeric] p a value within [0, 1]
       # @return Inverse CDF for valid p
       # @raises [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
-        return @scale * ((-Math.log(1 - p)) ** (1 / @shape))
+        return @scale * ((-Math.log(1 - p))**(1 / @shape))
       end
 
       # Returns the expected value of mean for the calling instance.
-      # 
+      #
       # @return Mean of the distribution
       def mean
         return @scale * Math.gamma(1 + 1 / @shape)
       end
 
       # Returns the expected value of variance for the calling instance.
-      # 
+      #
       # @return Variance of the distribution
       def variance
         m = mean
@@ -74,7 +75,7 @@ module Statistical
 
       # Compares two distribution instances and returns a boolean outcome
       #   Available publicly as #==
-      # 
+      #
       # @private
       #
       # @param other A distribution object (preferred)
@@ -88,7 +89,7 @@ module Statistical
 
       alias :== :eql?
       alias :p_value :quantile
-      
+
       private :eql?
     end
   end
