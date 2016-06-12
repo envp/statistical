@@ -3,10 +3,6 @@ require 'statistical/rng/laplace'
 require 'statistical/distribution/laplace'
 
 describe Statistical::Rng::Laplace do
-  it 'passes the G-test at a 95% significance level' do
-    skip("TODO: Pending a good hypothesis test")
-  end
-
   describe '.new' do
     context 'when called with no arguments' do
       let(:ldist) {Statistical::Distribution::Laplace.new}
@@ -51,15 +47,7 @@ describe Statistical::Rng::Laplace do
   end
 
   describe '#rand' do
-    let(:loc)     {rand - 0.5}
-    let(:scl)     {rand + 0.1}
-    let(:seed)    {Random.new_seed}
-    let(:ldist)   {Statistical::Distribution::Laplace.new(loc, scl)}
-    let(:lrng)  {Statistical::Rng::Laplace.new(ldist, seed)}
-
-    it 'returns a positive value' do
-      expect(lrng.rand).to be > 0
-    end
+    it 'passes the G-test at a 95% significance level'
   end
 
   describe '#==' do
@@ -234,10 +222,6 @@ describe Statistical::Distribution::Laplace do
       it 'returns `false` if they have different parameters' do
         expect(ldist_a == ldist_b).to be false
       end
-    end
-
-    context 'when compared against any distribution type' do
-      skip("Pending implementation")
     end
   end
 end

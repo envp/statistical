@@ -3,10 +3,6 @@ require 'statistical/rng/uniform_discrete'
 require 'statistical/distribution/uniform_discrete'
 
 describe Statistical::Rng::UniformDiscrete do
-  it 'passes the G-test at a 95% significance level' do
-    skip('FIXME: Not yet implemented')
-  end
-
   describe '.new' do
     context 'when parameters are specified' do
       let(:size) {10}
@@ -44,6 +40,8 @@ describe Statistical::Rng::UniformDiscrete do
     let(:udist_prng_a) {Statistical::Rng::UniformDiscrete.new(udist, seed)}
     let(:udist_prng_b) {Statistical::Rng::UniformDiscrete.new(udist, seed)}
 
+    it 'passes the G-test at a 95% significance level'
+
     # Non-deterministic, *given enough time* this will
     # fail if the implementation is wrong!
     it 'only returns elements from the support set' do
@@ -62,16 +60,6 @@ describe Statistical::Rng::UniformDiscrete do
     let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
 
     it {expect(udist_rng.members).to eq(udist.support)}
-  end
-
-  describe '#type' do
-    let(:size) {10}
-    let(:elems) {Array.new(size) {rand}}
-    let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
-    let(:udist_rng) {Statistical::Rng::UniformDiscrete.new(udist)}
-
-    # Should be same class as the source distribution
-    it {expect(udist_rng.type).to eq(udist.class)}
   end
 end
 

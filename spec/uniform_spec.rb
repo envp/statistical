@@ -3,14 +3,6 @@ require 'statistical/rng/uniform'
 require 'statistical/distribution/uniform'
 
 describe Statistical::Rng::Uniform do
-  # `.new` will be tested by explicitly calling the constructor for
-  # `Statistical::Rng::Uniform`, as the Rng factory module (`Statistical::Rng`)
-  # and it's concenrs are tested elsewhere. The same applies for the others
-
-  it 'passes the G-test at a 95% significance level' do
-    skip('Need to find a good library that supports this')
-  end
-
   describe '.new' do
     context 'when called with no arguments' do
       let(:obs) {Statistical::Rng::Uniform.new}
@@ -58,6 +50,8 @@ describe Statistical::Rng::Uniform do
     let(:dist_obj) {Statistical::Distribution::Uniform.new(lo, up)}
     let(:obs) {Statistical::Rng::Uniform.new(dist_obj, Random.new_seed)}
 
+    it 'passes the G-test at a 95% significance level'
+
     it 'returns a number between 0 and 1 by default' do
       sample = obs_default.rand
       expect(sample).to be <= 1
@@ -86,12 +80,6 @@ describe Statistical::Rng::Uniform do
 
       it 'should return false if bounds / seed differ' do
         expect(gen_a).not_to eq(gen_b)
-      end
-    end
-
-    context 'when compared against any other distribution class' do
-      it 'should return false if classes are different' do
-        skip('Waiting for other rngs for a complete test suite')
       end
     end
   end
@@ -206,10 +194,6 @@ describe Statistical::Distribution::Uniform do
       it 'returns `false` if they have different parameters' do
         expect(udist).not_to eq(udist_impostor)
       end
-    end
-
-    context 'when compared against any distribution type' do
-      skip('Needs implementation of other distributions')
     end
   end
 end

@@ -3,10 +3,6 @@ require 'statistical/rng/two_point'
 require 'statistical/distribution/two_point'
 
 describe Statistical::Rng::TwoPoint do
-  it 'passes the G-test at a 95% significance level' do
-    skip('FIXME: Not implemented yet')
-  end
-
   describe '.new' do
     let(:st_loss) {10}
     let(:st_win) {15}
@@ -53,6 +49,8 @@ describe Statistical::Rng::TwoPoint do
     let(:seed) {Random.new_seed}
     let(:trng) {Statistical::Rng::TwoPoint.new(tdist, seed)}
 
+    it 'passes the G-test at a 95% significance level'
+
     it 'returns an element from the support set' do
       expect([st_loss, st_win]).to include(trng.rand)
     end
@@ -77,12 +75,6 @@ describe Statistical::Rng::TwoPoint do
 
       it 'should return false if parameters / seed differ' do
         expect(trng).not_to eq(trng_b)
-      end
-    end
-
-    context 'when compared against any other distribution class' do
-      it 'should return false if classes are different' do
-        skip
       end
     end
   end
@@ -291,10 +283,6 @@ describe Statistical::Distribution::TwoPoint do
       it 'returns `false` if they have different parameters' do
         expect(tdist).not_to eq(tdist_b)
       end
-    end
-
-    context 'when compared against any distribution type' do
-      skip
     end
   end
 end

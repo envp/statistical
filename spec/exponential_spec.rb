@@ -3,9 +3,6 @@ require 'statistical/rng/exponential'
 require 'statistical/distribution/exponential'
 
 describe Statistical::Rng::Exponential do
-  it 'passes the G-test at a 95% significance level' do
-  end
-
   describe '.new' do
     context 'when called with no arguments' do
       let(:erng) {Statistical::Rng::Exponential.new}
@@ -41,6 +38,9 @@ describe Statistical::Rng::Exponential do
   describe '#rand' do
     let(:erng) {Statistical::Rng::Exponential.new}
     let(:bound) {rand}
+    
+    it 'passes the G-test at a 95% significance level'
+    
     it 'returns a positive number by default' do
       expect(erng.rand).to be > 0
     end
@@ -66,12 +66,6 @@ describe Statistical::Rng::Exponential do
 
       it 'should return false if parameters differ' do
         expect(erng).not_to eq(erng_alt)
-      end
-    end
-
-    context 'when compared against any other distribution class' do
-      it 'should return false if classes are different' do
-        skip
       end
     end
   end
@@ -184,10 +178,6 @@ describe Statistical::Distribution::Exponential do
       it 'returns `false` if they have different parameters' do
         expect(edist == edist_alt).to be false
       end
-    end
-
-    context 'when compared against any distribution type' do
-      skip("Not implemented yet")
     end
   end
 end
