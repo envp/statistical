@@ -42,8 +42,8 @@ module Statistical
       # @return [Float] Cumulative density function evaluated at x
       def cdf(x)
         return [0.5,
-          1.0 - 0.5 * Math.exp((@location - x).fdiv(@scale)),
-          0.5 * Math.exp((x - @location).fdiv(@scale))
+                1.0 - 0.5 * Math.exp((@location - x).fdiv(@scale)),
+                0.5 * Math.exp((x - @location).fdiv(@scale))
         ][x <=> @location]
       end
 
@@ -56,19 +56,11 @@ module Statistical
       # @raises [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
-        
-        return [@location, 
-          @location - @scale * Math.log(2 * (1.0 - p)),
-          @scale * Math.log(2 * p) + @location
-        ][p <=> 0.5]
-        
-        # return @location if p == 0.5
 
-        # if p < 0.5
-        #   return @scale * Math.log(2 * p) + @location
-        # else
-        #   return @location - @scale * Math.log(2 * (1.0 - p))
-        # end
+        return [@location,
+                @location - @scale * Math.log(2 * (1.0 - p)),
+                @scale * Math.log(2 * p) + @location
+        ][p <=> 0.5]
       end
 
       # Returns the expected mean value for the calling instance.

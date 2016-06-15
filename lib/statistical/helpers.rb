@@ -40,16 +40,16 @@ module Statistical
       case domain_type
       when :left_open
         @exclusions = [start, exclusions].flatten
-        exclude_end  = false
+        exclude_end = false
       when :right_open
         @exclusions = [exclusions, finish].flatten
-        exclude_end  = true
+        exclude_end = true
       when :full_open
         @exclusions = [start, exclusions, finish].flatten
-        exclude_end  = true
+        exclude_end = true
       when :closed
         @exclusions = [exclusions].flatten
-        exclude_end  = false
+        exclude_end = false
       else
         raise ArgumentError,
               "Invalid domain type, must be one of #{DOMAIN_TYPES}"
@@ -85,7 +85,7 @@ module Statistical
         when Fixnum, Bignum, Float
           has_val = has_val || (e == val)
         when Range
-          has_val = has_val || e.include?(val)
+          has_val ||= e.include?(val)
         end
       end
       return has_val

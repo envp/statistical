@@ -26,6 +26,7 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
+    - 'bin/**/*'
 
 # Indentation width must be 2 spaces
 Style/IndentationWidth:

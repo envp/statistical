@@ -25,9 +25,9 @@ module Statistical
     end
 
     def self.make_classmap
-      dist_klasses = constants.select {|k| const_get(k).is_a?(Class)}
-      keylist = dist_klasses.map {|k| k.to_s.snakecase.to_sym}
-      klasses = dist_klasses.map {|k| const_get(k)}
+      dist_klasses = constants.select { |k| const_get(k).is_a?(Class)}
+      keylist = dist_klasses.map { |k| k.to_s.snakecase.to_sym}
+      klasses = dist_klasses.map { |k| const_get(k)}
       return Hash[keylist.zip(klasses)].freeze
     end
 

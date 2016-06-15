@@ -30,10 +30,10 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return
       def pdf(x)
-        return [(@shape / @scale) * ((x / @scale)**(@shape - 1)) * 
+        return [(@shape / @scale) * ((x / @scale)**(@shape - 1)) *
                 Math.exp(-((x / @scale)**@shape)),
-          0.0,
-          0.0
+                0.0,
+                0.0
         ][@support <=> x]
       end
 
@@ -44,8 +44,8 @@ module Statistical
       # @return
       def cdf(x)
         return [1 - Math.exp(-((x / @scale)**@shape)),
-          1.0,
-          0.0
+                1.0,
+                0.0
         ][@support <=> x]
       end
 
@@ -75,7 +75,7 @@ module Statistical
         m = mean
         (@scale * @scale) * Math.gamma(1 + 2 / @shape) - (m * m)
       end
-      
+
       # Compares two distribution instances and returns a boolean outcome
       #   Available publicly as #==
       #
