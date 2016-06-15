@@ -243,9 +243,5 @@ describe Statistical::Distribution::UniformDiscrete do
         expect(udist_a == udist_b).to eq(false)
       end
     end
-
-    context 'when compared against any distribution type' do
-      skip("FIXME: Not yet implemented")
-    end
   end
 end
