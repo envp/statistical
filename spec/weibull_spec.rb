@@ -199,7 +199,7 @@ describe Statistical::Distribution::Weibull do
     let(:wdist) {Statistical::Distribution::Weibull.new(scale, shape)}
 
     it 'should return the correct variance' do
-      expect(wdist.variance).to be_within(Float::EPSILON).of(
+      expect(wdist.variance).to be_within(5 * Float::EPSILON).of(
         (scale**2) * (
           Math.gamma(1 + 2 / shape) - Math.gamma(1 + 1 / shape)**2
         )
