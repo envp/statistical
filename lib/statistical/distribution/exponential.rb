@@ -1,4 +1,4 @@
-require 'statistical/exceptions'
+require 'statistical/helpers'
 
 module Statistical
   module Distribution
@@ -9,7 +9,7 @@ module Statistical
     # @attr_reader [Numeric] rate Rate parameter controlling the
     #   exponential distribution. Same as `λ` in the canonical version
     class Exponential
-      attr_reader :rate
+      attr_reader :rate, :support
 
       # Returns a new `Statistical::Distribution::Uniform` instance
       #
@@ -18,7 +18,7 @@ module Statistical
       # @return `Statistical::Distribution::Exponential` instance
       def initialize(rate = 1)
         @rate = rate
-        self
+        @support = Domain[0.0, Float::INFINITY, :right_open]
       end
 
       # Returns value of probability density function at a point.
@@ -26,8 +26,7 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return [Float] Probility density function evaluated at x
       def pdf(x)
-        return 0 if x < 0
-        return @rate * Math.exp(-rate * x)
+        return [@rate * Math.exp(-@rate * x), 0.0, 0.0][@support <=> x]
       end
 
       # Returns value of cumulative density function at a point.
@@ -35,8 +34,7 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return [Float] Probability mass function evaluated at x
       def cdf(x)
-        return 0 if x <= 0
-        return 1 - Math.exp(-@rate * x)
+        return [1 - Math.exp(-@rate * x), 1.0, 0.0][@support <=> x]
       end
 
       # Returns value of inverse CDF for a given probability

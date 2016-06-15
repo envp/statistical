@@ -1,4 +1,4 @@
-require 'statistical/exceptions'
+require 'statistical/helpers'
 
 module Statistical
   module Distribution
@@ -16,13 +16,11 @@ module Statistical
     # @attr_reader [Numeric] upper The upper bound of the uniform distrbution.
     #   Defaults to 1.0.
     class Uniform
-      attr_reader :lower, :upper
+      attr_reader :lower, :upper, :support
 
       # Returns a new `Statistical::Distribution::Uniform` instance
       #
       # @note if given lower > upper, it swaps them internally
-      #
-      # @author Vaibhav Yenamandra
       #
       # @param [Numeric] start lower bound of the distribution.
       # @param [Numeric] finish upper bound of the distribution.
@@ -30,37 +28,28 @@ module Statistical
       def initialize(start = 0.0, finish = 1.0)
         @lower = [start, finish].min
         @upper = [start, finish].max
-        self
+        @support = Domain[@lower, @upper, :closed]
       end
 
       # Returns value of probability density function at a point
       #
-      # @author Vaibhav Yenamandra
-      #
       # @param [Numeric] x A real valued point
       # @return [Float] 1 if x is within [lower, upper], 0 otherwise
       def pdf(x)
-        return 0.0 if x < @lower || x > @upper
-        return 1.0 / (@upper - @lower)
+        return [1.0 / (@upper - @lower),  0.0, 0.0][@support <=> x]
       end
 
       # Returns value of cumulative density function at a point
       #
-      # @author Vaibhav Yenamandra
-      #
       # @param [Numeric] x A real valued point
       # @return [Float] 1 if x is within [lower, upper], 0 otherwise
       def cdf(x)
-        return 0.0 if x < @lower
-        return 1.0 if x > @upper
-        return (x - @lower).fdiv(@upper - @lower)
+        return [(x - @lower).fdiv(@upper - @lower), 1.0, 0.0][@support <=> x]
       end
 
       # Returns value of inverse CDF for a given probability
       #
       # @see #p_value
-      #
-      # @author Vaibhav Yenamandra
       #
       # @param [Numeric] p a value within [0, 1]
       # @return [Numeric] Inverse CDF for valid p
@@ -82,8 +71,6 @@ module Statistical
 
       # Returns the expected value of variance for the calling instance.
       #
-      # @author Vaibhav Yenamandra
-      #
       # @param [Numeric] p a value within [0, 1]
       # @return [Float] Variance of the distribution
       def variance
@@ -92,8 +79,6 @@ module Statistical
 
       # Compares two distribution instances and returns a boolean outcome
       #   Available publicly as #==
-      #
-      # @author Vaibhav Yenamandra
       #
       # @private
       #

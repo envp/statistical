@@ -1,4 +1,4 @@
-require 'statistical/exceptions'
+require 'statistical/helpers'
 
 module Statistical
   module Distribution
@@ -10,7 +10,7 @@ module Statistical
     # @attr_reader [Float] scale The distribution's scale parameter
     # @attr_reader [Float] shape The distribution's shape parameter
     class Weibull
-      attr_reader :scale, :shape
+      attr_reader :scale, :shape, :support
 
       # Returns a new `Statistical::Distribution::Weibull` instance
       #
@@ -20,6 +20,8 @@ module Statistical
       def initialize(scale = 1, shape = 1)
         @scale = scale.to_f
         @shape = shape.to_f
+        @support = Domain[0.0, Float::INFINITY, :right_open]
+        self
       end
 
       # Returns value of probability density function at a point. Calculated
@@ -28,11 +30,11 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return
       def pdf(x)
-        return 0 if x <= 0
-
-        return (@shape / @scale) *
-               ((x / @scale)**(@shape - 1)) *
-               Math.exp(-((x / @scale)**@shape))
+        return [(@shape / @scale) * ((x / @scale)**(@shape - 1)) * 
+                Math.exp(-((x / @scale)**@shape)),
+          0.0,
+          0.0
+        ][@support <=> x]
       end
 
       # Returns value of cumulative density function at a point. Calculated
@@ -41,9 +43,10 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return
       def cdf(x)
-        return 0 if x <= 0
-        xa = (x / @scale)**@shape
-        return 1 - Math.exp(-xa)
+        return [1 - Math.exp(-((x / @scale)**@shape)),
+          1.0,
+          0.0
+        ][@support <=> x]
       end
 
       # Returns value of inverse CDF for a given probability
@@ -72,7 +75,7 @@ module Statistical
         m = mean
         (@scale * @scale) * Math.gamma(1 + 2 / @shape) - (m * m)
       end
-
+      
       # Compares two distribution instances and returns a boolean outcome
       #   Available publicly as #==
       #

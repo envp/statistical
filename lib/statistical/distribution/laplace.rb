@@ -1,4 +1,4 @@
-require 'statistical/exceptions'
+require 'statistical/helpers'
 
 module Statistical
   module Distribution
@@ -11,7 +11,7 @@ module Statistical
     # @attr_reader [Numeric] location Location parameter to determine where the
     #   distribution is centered / where the mean lies at
     class Laplace
-      attr_reader :scale, :location
+      attr_reader :scale, :location, :support
 
       # Returns a new instance of the Laplace distribution; also known as
       #   the two-sided exponential distribution
@@ -23,6 +23,7 @@ module Statistical
       def initialize(location = 0, scale = 1)
         @scale = scale
         @location = location
+        @support = Domain[-Float::INFINITY, Float::INFINITY, :full_open]
         self
       end
 
@@ -31,7 +32,7 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return [Float] Probility density function evaluated at x
       def pdf(x)
-        x_ = (x - @location).abs.fdiv @scale
+        x_ = (x - @location).abs.fdiv(@scale)
         return Math.exp(- x_).fdiv(2 * @scale)
       end
 
@@ -40,12 +41,10 @@ module Statistical
       # @param [Numeric] x A real valued point
       # @return [Float] Cumulative density function evaluated at x
       def cdf(x)
-        return 0.5 if x == @location
-        if x < @location
-          return 0.5 * Math.exp((x - @location).fdiv @scale)
-        else
-          return 1.0 - 0.5 * Math.exp((@location - x).fdiv @scale)
-        end
+        return [0.5,
+          1.0 - 0.5 * Math.exp((@location - x).fdiv(@scale)),
+          0.5 * Math.exp((x - @location).fdiv(@scale))
+        ][x <=> @location]
       end
 
       # Returns value of inverse CDF for a given probability
@@ -57,13 +56,19 @@ module Statistical
       # @raises [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
-        return @location if p == 0.5
+        
+        return [@location, 
+          @location - @scale * Math.log(2 * (1.0 - p)),
+          @scale * Math.log(2 * p) + @location
+        ][p <=> 0.5]
+        
+        # return @location if p == 0.5
 
-        if p < 0.5
-          return @scale * Math.log(2 * p) + @location
-        else
-          return @location - @scale * Math.log(2 * (1.0 - p))
-        end
+        # if p < 0.5
+        #   return @scale * Math.log(2 * p) + @location
+        # else
+        #   return @location - @scale * Math.log(2 * (1.0 - p))
+        # end
       end
 
       # Returns the expected mean value for the calling instance.

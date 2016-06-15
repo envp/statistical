@@ -1,4 +1,4 @@
-require 'statistical/exceptions'
+require 'statistical/helpers'
 
 module Statistical
   module Distribution
@@ -20,7 +20,7 @@ module Statistical
     #   their respective state objects(defaults to 0, 1 respectively)
     class TwoPoint
       # This is probably the best but the least descriptive variable name
-      attr_reader :p, :q, :states
+      attr_reader :p, :q, :states, :support
 
       # Returns a new instance of the TwoPoint distribution
       #
@@ -61,6 +61,7 @@ module Statistical
           failure: state_failure,
           success: state_success
         }
+        @support = @states.values.sort
         self
       end
 
@@ -115,11 +116,6 @@ module Statistical
       def variance
         return @p * (@states[:success]**2) + @q * (@states[:failure]**2) -
                (mean**2)
-      end
-
-      # The support set over which the distribution exists
-      def support
-        return @states.values.sort
       end
 
       # Compares two distribution instances and returns a boolean outcome
