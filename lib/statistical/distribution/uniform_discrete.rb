@@ -1,5 +1,3 @@
-require 'statistical/exceptions'
-
 module Statistical
   # Module to collect all abstractions of distributions
   module Distribution
@@ -20,7 +18,7 @@ module Statistical
       #
       # @param [Array] elems The elements over which the distribution exists
       #   in [lower, upper]
-      # @raises [RangeError] if elems isn't one of Array, Range, Fixnum or
+      # @raise [RangeError] if elems isn't one of Array, Range, Fixnum or
       #   Bignum
       def initialize(elems)
         case elems
@@ -89,7 +87,7 @@ module Statistical
       #
       # @param [Numeric] p a value within [0, 1]
       # @return [Numeric]  Returns inverse CDF for valid p
-      # @raises [RangeError] if p > 1 or p < 0
+      # @raise [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
         return @lower if p.zero?

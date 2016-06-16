@@ -1,4 +1,3 @@
-require 'statistical/exceptions'
 require 'statistical/distribution/uniform'
 
 module Statistical

@@ -18,7 +18,7 @@ module Statistical
     end
 
     # Create a distribution identified by the type hash
-    # @raises ArgumentError if `type` was not found
+    # @raise ArgumentError if `type` was not found
     def self.create(type = :uniform, *args, &block)
       raise ArgumentError unless DISTRIBUTION_TYPES.include?(type)
       DISTRIBUTION_TYPES[type].new(*args, &block)

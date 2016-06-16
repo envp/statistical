@@ -12,3 +12,4 @@
 /coverage/**
 *.so
 *.o
+.gitmsg

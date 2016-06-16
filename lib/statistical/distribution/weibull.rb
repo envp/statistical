@@ -55,7 +55,7 @@ module Statistical
       #
       # @param [Numeric] p a value within [0, 1]
       # @return Inverse CDF for valid p
-      # @raises [RangeError] if p > 1 or p < 0
+      # @raise [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
         return @scale * ((-Math.log(1 - p))**(1 / @shape))

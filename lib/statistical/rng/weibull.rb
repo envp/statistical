@@ -1,15 +1,16 @@
-require 'statistical/exceptions'
 require 'statistical/distribution/weibull'
 
 module Statistical
-  # Companion RNG class for the continuous uniform distribution. Requires a
-  #   distrbution object of the corresponding distribution
-  #
-  # @author Vaibhav Yenamandra
-  #
-  # @attr_reader [Numeric] scale The scale parameter of the Weibull distribution
-  # @attr_reader [Numeric] shape The shape parameter of the Weibull distribution
   module Rng
+    # Companion RNG class for the continuous uniform distribution. Requires a
+    #   distrbution object of the corresponding distribution
+    #
+    # @author Vaibhav Yenamandra
+    #
+    # @attr_reader [Numeric] scale The scale parameter of the Weibull
+    #   distribution
+    # @attr_reader [Numeric] shape The shape parameter of the Weibull
+    #   distribution
     class Weibull
       attr_reader :generator, :scale, :shape
 

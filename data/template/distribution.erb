@@ -14,58 +14,56 @@ module Statistical
     class <%= distribution.capitalize.camelcase %>
       attr_reader # params go here
 
-      # Returns a new `Statistical::Distribution::Uniform` instance
-      # 
-      # @param [Types] param_name Description 
-      # @return `Statistical::Distribution::<%= distribution.capitalize.camelcase %>` instance      
+      # Returns a new `Statistical::Distribution::<%= distribution.capitalize.camelcase %>` instance
+      #
+      # @param [Types] param_name Description
+      # @return `Statistical::Distribution::<%= distribution.capitalize.camelcase %>` instance
       def initialize(<% parameters %>)
       end
-      
-      # Returns value of probability density function at a point. Calculated 
+
+      # Returns value of probability density function at a point. Calculated
       #   using some technique that you might want to name
-      # 
+      #
       # @param [Numeric] x A real valued point
-      # @return 
+      # @return Probability density function evaluated at `x`
       def pdf(x)
       end
 
-      # Returns value of cumulative density function at a point. Calculated 
+      # Returns value of cumulative density function at a point. Calculated
       #   using some technique that you might want to name
-      # 
+      #
       # @param [Numeric] x A real valued point
-      # @return 
+      # @return Cumulative density function evaluated for F(u <= x)
       def cdf(x)
       end
 
       # Returns value of inverse CDF for a given probability
       #
       # @see #p_value
-      # 
+      #
       # @param [Numeric] p a value within [0, 1]
       # @return Inverse CDF for valid p
-      # @raises [RangeError] if p > 1 or p < 0
+      # @raise [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
       end
 
       # Returns the mean value for the calling instance. Calculated mean, and
       #   not inferred from simulations
-      # 
-      # @param [Numeric] p a value within [0, 1]
+      #
       # @return Mean of the distribution
       def mean
       end
 
       # Returns the expected value of variance for the calling instance.
-      # 
-      # @param [Numeric] p a value within [0, 1]
+      #
       # @return Variance of the distribution
       def variance
       end
 
       # Compares two distribution instances and returns a boolean outcome
       #   Available publicly as #==
-      # 
+      #
       # @private
       #
       # @param other A distribution object (preferred)
@@ -77,9 +75,9 @@ module Statistical
         return true
       end
 
-      alias_method :==, :eql?
-      alias_method :p_value, :quantile
-      
+      alias :== :eql?
+      alias :p_value :quantile
+
       private :eql?
     end
   end

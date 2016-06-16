@@ -1,4 +1,3 @@
-require 'statistical/exceptions'
 require 'statistical/distribution/laplace'
 
 module Statistical

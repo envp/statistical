@@ -1,4 +1,3 @@
-require 'statistical/exceptions'
 require 'statistical/distribution/two_point'
 require 'statistical/distribution/uniform'
 

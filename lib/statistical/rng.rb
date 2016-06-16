@@ -19,7 +19,7 @@ module Statistical
 
     # Creates a new instance of the give type if the type was found.
     #
-    # @raises ArgumentError If the give type parameter was not found
+    # @raise ArgumentError If the give type parameter was not found
     def self.create(type = :uniform, *args, &block)
       raise ArgumentError unless RNG_TYPES.include?(type)
       RNG_TYPES[type].new(*args, &block)

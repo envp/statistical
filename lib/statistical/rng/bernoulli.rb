@@ -1,4 +1,3 @@
-require 'statistical/exceptions'
 require 'statistical/distribution/bernoulli'
 require 'statistical/rng/two_point'
 

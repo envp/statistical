@@ -26,6 +26,7 @@ Bug reports and pull requests are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.
 ## Roadmap
 ### Immediate focus
 * Implementations of all common distributions mentioned in the NIST [engineering and statistics handbook](http://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm)
+* Parity with Sciruby/distrbution (The inspiration for this project)
 
 ### Long term
 * Add a module `Statistical::Hypothesis` which allows for statistical hypothesis testing

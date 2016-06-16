@@ -43,7 +43,7 @@ module Statistical
       #
       # @param [Float] p a value within [0, 1]
       # @return Inverse CDF for valid p
-      # @raises [RangeError] if p > 1 or p < 0
+      # @raise [RangeError] if p > 1 or p < 0
       def quantile(p)
         raise RangeError, "`p` must be in [0, 1], found: #{p}" if p < 0 || p > 1
         return Math.log(1 - p) / -@rate
@@ -52,7 +52,6 @@ module Statistical
       # Returns the mean value for the calling instance. Calculated mean, and
       #   not inferred from simulations
       #
-      # @param [Numeric] p a value within [0, 1]
       # @return Mean of the distribution
       def mean
         return 1.0 / @rate
@@ -60,7 +59,6 @@ module Statistical
 
       # Returns the expected value of variance for the calling instance.
       #
-      # @param [Numeric] p a value within [0, 1]
       # @return Variance of the distribution
       def variance
         return (1.0 / @rate)**2
