@@ -35,7 +35,7 @@ end
 task :release => :build do
   system "git tag -a v#{Statistical::VERSION} -m 'Version #{Statistical::VERSION}'"
   system "git push --tags"
-  system "gem push typhoeus-#{Statistical::VERSION}.gem"
+  system "gem push statistical-#{Statistical::VERSION}.gem"
 end
 
 task :default => :spec
