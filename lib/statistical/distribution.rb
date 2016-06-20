@@ -5,6 +5,7 @@ require 'statistical/distribution/bernoulli'
 require 'statistical/distribution/exponential'
 require 'statistical/distribution/laplace'
 require 'statistical/distribution/weibull'
+require 'statistical/distribution/frechet'
 
 module Statistical
   # Factory module used to create instances of various distributions classes

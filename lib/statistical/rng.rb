@@ -5,6 +5,7 @@ require 'statistical/rng/bernoulli'
 require 'statistical/rng/exponential'
 require 'statistical/rng/laplace'
 require 'statistical/rng/weibull'
+require 'statistical/rng/frechet'
 
 module Statistical
   # Factory module to create instances of the various classes
