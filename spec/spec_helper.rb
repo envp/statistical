@@ -3,3 +3,4 @@ require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
 require 'statistical'
+require 'pry-byebug'

@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'codeclimate-test-reporter', :group => :test, :require => nil
+group :test do
+  gem 'codeclimate-test-reporter', :require => nil
+  gem 'rspec-prof'
+end
+
 gem 'yard', require: false
 
 # Other dependencies go in statistical.gemspec
