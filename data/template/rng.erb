@@ -1,13 +1,13 @@
 require 'statistical/distribution/<%= distribution%>'
 
 module Statistical
-  # Companion RNG class for the continuous uniform distribution. Requires a
+  # Companion RNG class for the continuous <%= distribution.capitalize.camelcase %> distribution. Requires a
   #   distrbution object of the corresponding distribution
   #
   # @author Vaibhav Yenamandra
   #
-  # @attr_reader [Numeric] lower The lower bound of the uniform distribution.
-  # @attr_reader [Numeric] upper The upper bound of the uniform distribution.
+  # @attr_reader [Numeric] lower The lower bound of the <%= distribution.capitalize.camelcase %> distribution.
+  # @attr_reader [Numeric] upper The upper bound of the <%= distribution.capitalize.camelcase %> distribution.
   module Rng
     class <%= distribution.capitalize.camelcase %>
       attr_reader :generator, # other params go here

@@ -50,7 +50,7 @@ describe Statistical::Rng::Weibull do
   end
 
   describe '#==' do
-    context 'when compared against another uniform distribution' do
+    context 'when compared against another weibull distribution' do
       let(:scale)   {0.1 + rand}
       let(:shape)   {0.1 + rand}
       let(:seed_a)  {Random.new_seed}
@@ -199,7 +199,7 @@ describe Statistical::Distribution::Weibull do
     let(:wdist) {Statistical::Distribution::Weibull.new(scale, shape)}
 
     it 'should return the correct variance' do
-      expect(wdist.variance).to be_within(5 * Float::EPSILON).of(
+      expect(wdist.variance).to be_within(10 * Float::EPSILON).of(
         (scale**2) * (
           Math.gamma(1 + 2 / shape) - Math.gamma(1 + 1 / shape)**2
         )
@@ -208,7 +208,7 @@ describe Statistical::Distribution::Weibull do
   end
 
   describe '#==' do
-    context 'when compared against another Uniform distribution' do
+    context 'when compared against another weibull distribution' do
       let(:scale_a) {0.1 + rand}
       let(:shape_a) {0.1 + rand}
       let(:scale_b) {0.1 + rand}

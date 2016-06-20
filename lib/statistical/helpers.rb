@@ -83,9 +83,9 @@ module Statistical
       @exclusions.each do |e|
         case e
         when Fixnum, Bignum, Float
-          has_val = has_val || (e == val)
+          has_val = (has_val || (e == val))
         when Range
-          has_val ||= e.include?(val)
+          has_val = (has_val || e.include?(val))
         end
       end
       return has_val

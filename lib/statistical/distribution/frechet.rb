@@ -20,7 +20,7 @@ module Statistical
       # @param [Numeric] location Optional location parameter
       # @param [Numeric] scale Optional scale parameter
       # @return [Frechet] `Statistical::Distribution::Frechet` instance
-      def initialize(alpha=nil, location=0, scale=1)
+      def initialize(alpha = nil, location = 0, scale = 1)
         raise ArgumentError if alpha.nil?
 
         @alpha = alpha.to_f
@@ -41,7 +41,7 @@ module Statistical
         # expressions would help retain the array lookup idiom, but that's for
         # later
         if (@support <=> x).zero?
-          return (@alpha / @scale) * xs**(-1-@alpha) * Math.exp(-(xs**-@alpha))
+          return (@alpha / @scale) * xs**(-1 - @alpha) * Math.exp(-(xs**-@alpha))
         else
           return 0
         end
@@ -56,7 +56,7 @@ module Statistical
 
         case @support <=> x
         when 0
-          return Math.exp(-(xs**(-@alpha)))
+          return Math.exp(-(xs**-@alpha))
         when 1
           return 1
         when -1

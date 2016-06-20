@@ -47,7 +47,7 @@ describe Statistical::Rng::Exponential do
   end
 
   describe '#==' do
-    context 'when compared against another uniform distribution' do
+    context 'when compared against another exponential distribution' do
       let(:rate) {0.5}
 
       let(:seed) {Random.new_seed}
@@ -166,7 +166,7 @@ describe Statistical::Distribution::Exponential do
   end
 
   describe '#==' do
-    context 'when compared against another Uniform distribution' do
+    context 'when compared against another exponential distribution' do
       let(:rate) {rand(10)}
       let(:edist) {Statistical::Distribution::Exponential.new}
       let(:edist_clone) {Statistical::Distribution::Exponential.new}

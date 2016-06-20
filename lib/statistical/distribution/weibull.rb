@@ -33,8 +33,7 @@ module Statistical
         return [(@shape / @scale) * ((x / @scale)**(@shape - 1)) *
                 Math.exp(-((x / @scale)**@shape)),
                 0.0,
-                0.0
-        ][@support <=> x]
+                0.0][@support <=> x]
       end
 
       # Returns value of cumulative density function at a point. Calculated
@@ -45,8 +44,7 @@ module Statistical
       def cdf(x)
         return [1 - Math.exp(-((x / @scale)**@shape)),
                 1.0,
-                0.0
-        ][@support <=> x]
+                0.0][@support <=> x]
       end
 
       # Returns value of inverse CDF for a given probability

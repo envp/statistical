@@ -10,6 +10,7 @@ require 'statistical/version'
 
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.verbose = false
+  t.rspec_opts = '-f p'
 end
 
 # Add a cop task for code linting
@@ -23,7 +24,7 @@ end
 
 # Build the gem
 task :build do
-  system "gem build statistical.gemspec"
+  system 'gem build statistical.gemspec'
 end
 
 # Install gem locally
@@ -34,7 +35,7 @@ end
 # Release gem to github
 task :release => :build do
   system "git tag -a v#{Statistical::VERSION} -m 'Version #{Statistical::VERSION}'"
-  system "git push --tags"
+  system 'git push --tags'
   system "gem push statistical-#{Statistical::VERSION}.gem"
 end
 

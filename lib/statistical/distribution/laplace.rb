@@ -43,8 +43,7 @@ module Statistical
       def cdf(x)
         return [0.5,
                 1.0 - 0.5 * Math.exp((@location - x).fdiv(@scale)),
-                0.5 * Math.exp((x - @location).fdiv(@scale))
-        ][x <=> @location]
+                0.5 * Math.exp((x - @location).fdiv(@scale))][x <=> @location]
       end
 
       # Returns value of inverse CDF for a given probability
@@ -59,8 +58,7 @@ module Statistical
 
         return [@location,
                 @location - @scale * Math.log(2 * (1.0 - p)),
-                @scale * Math.log(2 * p) + @location
-        ][p <=> 0.5]
+                @scale * Math.log(2 * p) + @location][p <=> 0.5]
       end
 
       # Returns the expected mean value for the calling instance.

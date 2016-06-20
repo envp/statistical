@@ -68,7 +68,7 @@ describe Statistical::Rng::TwoPoint do
     let(:trng_b) {Statistical::Rng::TwoPoint.new(tdist, seed_b)}
     let(:trng_clone) {Statistical::Rng::TwoPoint.new(tdist, seed_clone)}
 
-    context 'when compared against another uniform distribution' do
+    context 'when compared against another two-point distribution' do
       it 'should return true if the parameters and seed are the same' do
         expect(trng).to eq(trng_clone)
       end

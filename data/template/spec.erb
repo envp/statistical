@@ -21,7 +21,7 @@ describe Statistical::Rng::<%= distribution.capitalize.camelcase %> do
   end
 
   describe '#==' do
-    context 'when compared against another uniform distribution' do
+    context 'when compared against another <%= distribution.capitalize.camelcase %> distribution' do
       it 'should return true if the bounds and seed are the same' do
         fail
       end
@@ -91,7 +91,7 @@ describe Statistical::Distribution::<%= distribution.capitalize.camelcase %> do
   end
 
   describe '#==' do
-    context 'when compared against another Uniform distribution' do
+    context 'when compared against another <%= distribution.capitalize.camelcase %> distribution' do
       it 'returns `true` if they have the same parameters'
       it 'returns `false` if they have different parameters'
     end

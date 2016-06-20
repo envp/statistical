@@ -14,7 +14,7 @@ module Statistical
 
       def initialize(dobj = nil, seed = Random.new_seed)
         if dobj.nil?
-          raise ArgumentError, "Need a alpha-parametrized Frechet object!"
+          raise ArgumentError, 'Need a alpha-parametrized Frechet object!'
         elsif !dobj.is_a?(Statistical::Distribution::Frechet)
           raise TypeError, "Expected Frechet Distribution found #{dobj.class}"
         end

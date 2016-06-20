@@ -3,21 +3,20 @@ require 'statistical/rng/frechet'
 require 'statistical/distribution/frechet'
 
 describe Statistical::Rng::Frechet do
-
   describe '.new' do
     context 'when called with no arguments' do
-      it {
-        expect {
+      it do
+        expect do
           Statistical::Rng::Frechet.new
-        }.to raise_error(ArgumentError)
-      }
-      
+        end.to raise_error(ArgumentError)
+      end
+
       context 'when called without a Statistical::Distribution::Frechet obj' do
-        it {
-          expect {
+        it do
+          expect do
             Statistical::Rng::Frechet.new(Object.new)
-          }.to raise_error(TypeError)
-        }
+          end.to raise_error(TypeError)
+        end
       end
     end
 
@@ -84,15 +83,14 @@ describe Statistical::Rng::Frechet do
   end
 end
 
-
 describe Statistical::Distribution::Frechet do
   describe '.new' do
     context 'when called with no arguments' do
-      it {
-        expect {
+      it do
+        expect do
           Statistical::Distribution::Frechet.new
-        }.to raise_error(ArgumentError)
-      }
+        end.to raise_error(ArgumentError)
+      end
     end
 
     context 'when parameters are specified' do
@@ -136,7 +134,7 @@ describe Statistical::Distribution::Frechet do
         expect(fdist.pdf(x)).to be_within(Float::EPSILON).of(
           (alpha / s) *
           (((x - l) / s)**(-1 - alpha)) *
-          Math.exp(-(((x - l) / s)**(-alpha)))
+          Math.exp(-(((x - l) / s)**-alpha))
         )
       end
     end
@@ -145,7 +143,7 @@ describe Statistical::Distribution::Frechet do
   describe '#cdf' do
     context 'when called with x < location parameter' do
       let(:alpha) {rand}
-      let(:l)   {rand}
+      let(:l) {rand}
       let(:s) {rand}
       let(:fdist) {Statistical::Distribution::Frechet.new(alpha, l, s)}
 
@@ -161,7 +159,7 @@ describe Statistical::Distribution::Frechet do
 
       it 'should evaluate the cdf correctly' do
         expect(fdist.cdf(x)).to be_within(Float::EPSILON).of(
-          Math.exp(-((x - l) / s)**(-alpha))
+          Math.exp(-((x - l) / s)**-alpha)
         )
       end
     end
@@ -170,20 +168,20 @@ describe Statistical::Distribution::Frechet do
   describe '#quantile' do
     context 'when called for x < 0' do
       let(:fdist) {Statistical::Distribution::Frechet.new(1 + rand)}
-      it {
-        expect {
+      it do
+        expect do
           fdist.quantile(-Float::EPSILON)
-        }.to raise_error(RangeError)
-      }
+        end.to raise_error(RangeError)
+      end
     end
 
     context 'when called for x > 1' do
       let(:fdist) {Statistical::Distribution::Frechet.new(1 + rand)}
-      it {
-        expect {
+      it do
+        expect do
           fdist.quantile(1 + Float::EPSILON)
-        }.to raise_error(RangeError)
-      }
+        end.to raise_error(RangeError)
+      end
     end
 
     context 'when called for x in [0, 1]' do
@@ -204,7 +202,7 @@ describe Statistical::Distribution::Frechet do
     let(:alpha) {rand}
     let(:loc)   {rand}
     let(:scale) {rand}
-    let(:fdist) {Statistical::Distribution::Frechet.new(alpha, loc,scale)}
+    let(:fdist) {Statistical::Distribution::Frechet.new(alpha, loc, scale)}
     let(:x)     {rand}
 
     it 'should be the same as #quantile' do
@@ -254,7 +252,7 @@ describe Statistical::Distribution::Frechet do
   end
 
   describe '#==' do
-    context 'when compared against another Uniform distribution' do
+    context 'when compared against another frechet distribution' do
       let(:alpha)   {rand}
       let(:loc_b)   {rand}
       let(:scl_b)   {rand}
@@ -262,11 +260,11 @@ describe Statistical::Distribution::Frechet do
       let(:fdist_a) {Statistical::Distribution::Frechet.new(alpha)}
       let(:fdist_b) {Statistical::Distribution::Frechet.new(alpha, loc_b, scl_b)}
       let(:fdist_c) {Statistical::Distribution::Frechet.new(alpha)}
-      
+
       it 'returns `true` if they have the same parameters' do
         expect(fdist_a == fdist_c).to be true
       end
-      
+
       it 'returns `false` if they have different parameters' do
         expect(fdist_a == fdist_b).to be false
       end

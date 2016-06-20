@@ -205,7 +205,7 @@ describe Statistical::Distribution::Laplace do
   end
 
   describe '#==' do
-    context 'when compared against another Uniform distribution' do
+    context 'when compared against another two-point distribution' do
       let(:loc_a) {rand}
       let(:scl_a) {1 + rand}
       let(:loc_b) {rand}

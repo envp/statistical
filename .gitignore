@@ -13,3 +13,5 @@
 *.so
 *.o
 .gitmsg
+/profile/**
+spec/tmp/**
