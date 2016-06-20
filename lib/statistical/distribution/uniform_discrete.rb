@@ -1,3 +1,5 @@
+require 'statistical/core_extensions'
+
 module Statistical
   # Module to collect all abstractions of distributions
   module Distribution
@@ -8,6 +10,8 @@ module Statistical
     # @attr_reader [Array, Numeric] support The support set of valid values a
     # random variate from the distribution can take. Must have at least 1 value
     class UniformDiscrete
+      using Statistical::ArrayExtensions
+
       attr_reader :count, :support, :lower, :upper
       # Returns a model for the discrete uniform distribution on all elements
       # present in the given set of elemets `elems`
@@ -108,7 +112,7 @@ module Statistical
       #
       # @return [Float]  Variance of the distribution
       def variance
-        return @support.variance
+        return @support.pvariance
       end
 
       # Compares two distribution instances and returns a boolean

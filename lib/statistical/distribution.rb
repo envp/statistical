@@ -6,11 +6,14 @@ require 'statistical/distribution/exponential'
 require 'statistical/distribution/laplace'
 require 'statistical/distribution/weibull'
 require 'statistical/distribution/frechet'
+require 'statistical/distribution/gumbel'
 
 module Statistical
   # Factory module used to create instances of various distributions classes
   # nested under itself
   module Distribution
+    using Statistical::StringExtensions
+
     # @private
     # No need to document this
     # Dynamically add constants when called

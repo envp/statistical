@@ -6,11 +6,14 @@ require 'statistical/rng/exponential'
 require 'statistical/rng/laplace'
 require 'statistical/rng/weibull'
 require 'statistical/rng/frechet'
+require 'statistical/rng/gumbel'
 
 module Statistical
   # Factory module to create instances of the various classes
   # nested under itself
   module Rng
+    using Statistical::StringExtensions
+
     # @private
     # No need to document this
     # Dynamically add constants when called

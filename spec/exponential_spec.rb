@@ -167,7 +167,7 @@ describe Statistical::Distribution::Exponential do
 
   describe '#==' do
     context 'when compared against another exponential distribution' do
-      let(:rate) {rand(10)}
+      let(:rate) {1 + rand(10)}
       let(:edist) {Statistical::Distribution::Exponential.new}
       let(:edist_clone) {Statistical::Distribution::Exponential.new}
       let(:edist_alt) {Statistical::Distribution::Exponential.new(rate)}

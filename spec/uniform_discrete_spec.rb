@@ -3,6 +3,8 @@ require 'statistical/rng/uniform_discrete'
 require 'statistical/distribution/uniform_discrete'
 
 describe Statistical::Rng::UniformDiscrete do
+  using Statistical::ArrayExtensions
+
   describe '.new' do
     context 'when parameters are specified' do
       let(:size) {10}
@@ -64,6 +66,8 @@ describe Statistical::Rng::UniformDiscrete do
 end
 
 describe Statistical::Distribution::UniformDiscrete do
+  using Statistical::ArrayExtensions
+
   describe '.new' do
     context 'when parameters are specified' do
       let(:size) {10}
@@ -220,7 +224,7 @@ describe Statistical::Distribution::UniformDiscrete do
     let(:udist) {Statistical::Distribution::UniformDiscrete.new(elems)}
 
     it 'should return the correct variance for 1..10' do
-      expect(udist.variance).to eq(elems.variance)
+      expect(udist.variance).to eq(elems.pvariance)
     end
   end
 
