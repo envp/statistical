@@ -1,4 +1,3 @@
-require 'statistical/exceptions'
 require 'statistical/distribution/<%= distribution%>'
 
 module Statistical
@@ -18,15 +17,16 @@ module Statistical
           raise TypeError, "Expected Distribution object or nil, found #{dobj.class}"
         end
         dobj = Statistical::Distribution::<%= distribution.capitalize.camelcase %>.new if dobj.nil?
-        @generator = Rng::Uniform.new(Distribution::Uniform.new, seed)
+        @generator = Random.new(seed)
         # Map other parameters here
         @sdist = dobj
       end
 
       # Return the next random number from the sequence
       #
-      # @return next random number in the sequence
+      # @return [Float] next random number in the sequence
       def rand
+        @sdist.quantile(@generator.rand)
       end
 
       # Compare against another rng to see if they are the same
@@ -34,9 +34,8 @@ module Statistical
       # @return true if and only if, source distributions are the same and the
       #   prng has the same initial state
       def eql?(other)
-        return false unless other.is_a?(self.class)
-        # Compare parameters and other stuff here
-        @generator == other.generator
+        return other.is_a?(self.class) &&
+               @generator == other.generator
       end
 
       # Return the type of the source distribution

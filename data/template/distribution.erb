@@ -1,4 +1,4 @@
-require 'statistical/exceptions'
+require 'statistical/helpers'
 
 module Statistical
   module Distribution
@@ -70,9 +70,7 @@ module Statistical
       # @return [Boolean] true if-and-only-if two instances are of the same
       #   class and have the same parameters.
       def eql?(other)
-        return false unless other.is_a?(self.class)
-        # Compare parameters and other stuff here
-        return true
+        return other.is_a?(self.class)
       end
 
       alias :== :eql?
