@@ -1,17 +1,17 @@
 require 'statistical/distribution/gumbel'
 
 module Statistical
-  # Companion RNG class for the continuous Gumbel distribution. Requires a
-  #   distrbution object of the corresponding distribution
-  #
-  # @author Vaibhav Yenamandra
-  #
-  # @attr_reader [Float] location The location parameter of the Gumbel
-  #   distribution
-  # @attr_reader [Float] scale The scale parameter of the Gumbel distribution
-  # @attr_reader [Float] generator The underlying uniform variate source used
-  #   to power `Gumbel#rand`
   module Rng
+    # Companion RNG class for the continuous Gumbel distribution. Requires a
+    #   distrbution object of the corresponding distribution
+    #
+    # @author Vaibhav Yenamandra
+    #
+    # @attr_reader [Float] location The location parameter of the Gumbel
+    #   distribution
+    # @attr_reader [Float] scale The scale parameter of the Gumbel distribution
+    # @attr_reader [Float] generator The underlying uniform variate source used
+    #   to power `Gumbel#rand`
     class Gumbel
       attr_reader :generator, :location, :scale
 

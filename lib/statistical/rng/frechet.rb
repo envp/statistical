@@ -1,14 +1,14 @@
 require 'statistical/distribution/frechet'
 
 module Statistical
-  # Companion RNG class for the continuous uniform distribution. Requires a
-  #   distrbution object of the corresponding distribution
-  #
-  # @author Vaibhav Yenamandra
-  #
-  # @attr_reader [Numeric] lower The lower bound of the uniform distribution.
-  # @attr_reader [Numeric] upper The upper bound of the uniform distribution.
   module Rng
+    # Companion RNG class for the continuous uniform distribution. Requires a
+    #   distrbution object of the corresponding distribution
+    #
+    # @author Vaibhav Yenamandra
+    #
+    # @attr_reader [Numeric] lower The lower bound of the uniform distribution.
+    # @attr_reader [Numeric] upper The upper bound of the uniform distribution.
     class Frechet
       attr_reader :generator, :alpha, :location, :scale
 

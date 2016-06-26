@@ -129,4 +129,21 @@ module Statistical
 
     alias :to_s :inspect
   end
+  
+  # Useful truncated floating point constants that are automatically added
+  # to the base class
+  module Constants
+    # Euler-Mascheroni constant
+    EULER_GAMMA = 0.5772156649015328
+    
+    SQRT_2      = 1.4142135623730950
+    SQRT_PI     = 1.7724538509055160
+    SQRT_2PI    = 2.5066282746310005
+    
+    # Whenever this module is included in any class, that class is able
+    # to access all of the above constants locally
+    def self.included(cls)
+      self.constants.each {|c| cls.send :const_set, c, self.const_get(c)}
+    end
+  end
 end

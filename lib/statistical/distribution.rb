@@ -7,6 +7,7 @@ require 'statistical/distribution/laplace'
 require 'statistical/distribution/weibull'
 require 'statistical/distribution/frechet'
 require 'statistical/distribution/gumbel'
+require 'statistical/distribution/normal'
 
 module Statistical
   # Factory module used to create instances of various distributions classes

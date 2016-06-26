@@ -11,11 +11,14 @@ module Statistical
     # @attr_reader support [Float] The region of the real line where this
     #   distribution is defined to exist
     class Gumbel
+      include Statistical::Constants
+      
       attr_reader :location, :scale, :support
 
       # Returns a new `Statistical::Distribution::Gumbel` instance
       #
-      # @param [Types] location Description
+      # @param [Float] location location parameter of the distribution
+      # @param [Float] The dstribution's scale parameter
       # @return `Statistical::Distribution::Gumbel` instance
       def initialize(location = 0, scale = 1)
         @location = location.to_f
@@ -65,7 +68,7 @@ module Statistical
       #
       # @return Mean of the distribution
       def mean
-        return @location + @scale * Statistical::EULER_GAMMA
+        return @location + @scale * EULER_GAMMA
       end
 
       # Returns the expected value of variance for the calling instance.

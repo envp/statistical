@@ -13,8 +13,7 @@ module Statistical
     #   as a source of randomness to base the current RNG on
     class UniformDiscrete
       attr_reader :generator, :lower, :upper
-      # Companion RNG class for the continuous uniform distribution. Requires a
-      #   distrbution object of the corresponding distribution
+      # Uniform Discrete RNG constructor
       #
       # @author Vaibhav Yenamandra
       #

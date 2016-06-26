@@ -7,6 +7,7 @@ require 'statistical/rng/laplace'
 require 'statistical/rng/weibull'
 require 'statistical/rng/frechet'
 require 'statistical/rng/gumbel'
+require 'statistical/rng/normal'
 
 module Statistical
   # Factory module to create instances of the various classes

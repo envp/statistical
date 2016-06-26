@@ -4,21 +4,21 @@ require 'statistical/distribution/uniform'
 module Statistical
   module Rng
     # Random number generator to model the two point distribution used for
-    # working with problem where the state space has only two points with
-    # distinct probabilities
+    #   working with problem where the state space has only two points with
+    #   distinct probabilities. Companion RNG class for the two-point 
+    #   distribution. Requires a distrbution object of the corresponding type. 
+    #   Defaults to the standard bernoulli if no arguments are given.
+    #
+    # @author Vaibhav Yenamandra
+    #
+    # @attr_reader [Float] p Probability of success state
+    # @attr_reader [Float] q Probability of failure state
+    # @attr_reader [Hash] states Possible states that the RNG can take up
+    # @attr_reader [Object] generator The PRNG being used for randomness
     class TwoPoint
       attr_reader :generator, :p, :q, :states
 
-      # Companion RNG class for the two-point distribution. Requires a
-      # distrbution object of the corresponding type. Defaults to the standard
-      # bernoulli if no arguments are given
-      #
-      # @author Vaibhav Yenamandra
-      #
-      # @attr_reader [Float] p Probability of success state
-      # @attr_reader [Float] q Probability of failure state
-      # @attr_reader [Hash] states Possible states that the RNG can take up
-      # @attr_reader [Object] generator The PRNG being used for randomness
+      
       def initialize(dobj = nil, seed = Random.new_seed)
         unless dobj.nil? || dobj.is_a?(Statistical::Distribution::TwoPoint)
           raise TypeError,
